@@ -18,7 +18,7 @@ export default function ReflectionExerciseList ({}) {
   const [exerciseView, updateExerciseView] = useState(0)
 
   const goToNextExerc = ()  => {
-    if (exerciseView  <= 6) { 
+    if (exerciseView  <6) { 
       updateExerciseView(exerciseView +1)
     }
   }
