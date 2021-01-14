@@ -7,29 +7,35 @@ import {Heading} from '../components/Heading'
 import {StartExerciseButton} from '../components/StartExerciseButton'
 import { useNavigation } from '@react-navigation/native';
 import { AntDesign } from '@expo/vector-icons';
+import {Instruction} from '../components/Instruction'
 
 export function DisplayedExercise (props) { 
   const navigation = useNavigation();
 
-  function navigateToExercise() {
-    navigation.navigate("Exercise");
+  const {name, title, text, image} = props.exercise;
+  const previousExercise = props.previousExercise;
+  const nextExercise = props.nextExercise;  
+  
+function navigateToExercise() {
+    navigation.navigate("Exercise", {name:name, previousExercise:previousExercise, nextExercise:nextExercise});
 }
+
 function goBackOneStep(){
   navigation.goBack()
 }
   return (
     <HomeScreenContainer style = {styles.screen}> 
-    <Heading style ={styles.title}> Imago Reflection </Heading>
-      <Text style ={styles.maintitle} > Read through the set of exercises prior to starting to journal.  </Text>
-        <View style = {styles.carousel}> 
+    <Heading > Imago Reflection </Heading>
+      <Instruction  > Read through the set of exercises prior to starting to journal.  </Instruction>
+        <View style = {styles.carousel}>
         <AntDesign name="leftcircleo" size={24} color="black" onPress ={() => props.goToPrevExerc()}/>  
-        <Text style = {styles.exerciseTitle} > {props.exercise.name} </Text>
+        <Text style = {styles.exerciseTitle} > {name} </Text>
         <AntDesign name="rightcircleo" size={24} color="black" onPress ={() => props.goToNextExerc()} />
         </View>
-      <Text style = {styles.question}> {props.exercise.title} </Text>
-      <ImageComponent source = {props.exercise.image} style ={styles.image}/> 
+      <Text style = {styles.question}> {title} </Text>
+      <ImageComponent source = {image} style ={styles.image}/> 
       <View style = {styles.view}> 
-      <Text style = { styles.exercise}>  {props.exercise.text} </Text>
+      <Text style = { styles.exercise}>  {text} </Text>
       </View>
      <StartExerciseButton title='Start reflecting' onPress={() => navigateToExercise()}/> 
     </HomeScreenContainer>
@@ -38,15 +44,7 @@ function goBackOneStep(){
 } 
 
 const styles = StyleSheet.create({
- maintitle: { 
-   textAlign:'center'
- }, 
-  title: {
-    marginVertical: 20,
-    fontSize:20, 
-    textAlign:'center', 
-    color:Colors.primary
-  },
+  
   exercise: { 
     width: '90%', 
     textAlign:'center', 

@@ -3,22 +3,34 @@ const Schema = mongoose.Schema;
 
 
 
-const postsSchema =  new Schema ({
-    title: {
+const reflectionSchema =  new Schema ({
+    exercise1: {
     type: String,
-    required: true 
+    required: false 
   },
-  vote: {
-    type: Number,
-    default: 0
-  }, 
-  timestamp: { 
-    type: Date, 
-    default:Date.now()
-  }
-}  ); 
+  exercise2: {
+    type: String,
+    required: false 
+  },  exercise3: {
+    type: String,
+    required: false 
+  }, exercise4: {
+    type: String,
+    required: false 
+  }, exercise5: {
+    type: String,
+    required: false 
+  }, exercise6: {
+    type: String,
+    required: false 
+  }, exercise7: {
+    type: String,
+    required: false 
+  },
+
+}); 
 
 // this creates and database and also provide all the methods which we can use to add / extract data 
-const PostsDb = mongoose.model('newDb', postsSchema); 
+const ReflectionDb = mongoose.model('newDb', reflectionSchema); 
 
-module.exports = PostsDb; 
+module.exports = ReflectionDb; 

@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { Carousel } from '@ant-design/react-native';
 import {ImageComponent} from '../components/ImageComponent'
@@ -13,22 +13,35 @@ import {DisplayedExercise} from '../components/DiplayedExercise'
 
 export default function ReflectionExerciseList ({}) { 
 
-  const newdata = exercises; 
+  const data = exercises; 
 
-  const [exerciseView, updateExerciseView] = useState(0)
+  const [currentExercise, updateCurrentExercise] = useState(0);
+  const [nextExercise, updateNextExercise] =useState(1);
+  const [previousExercise, updatePreviousExercise] =useState(0);
+
+
 
   const goToNextExerc = ()  => {
-    if (exerciseView  <6) { 
-      updateExerciseView(exerciseView +1)
+    if (currentExercise  <6) { 
+      updateCurrentExercise(currentExercise +1); 
     }
   }
    const goToPrevExerc = ()  => {
-     if(exerciseView > 0 ) { 
-      updateExerciseView(exerciseView -1)
+     if(currentExercise > 0 ) { 
+      updateCurrentExercise(currentExercise -1)
      }
   }
 
+  
+  useEffect(() => {
+    if(nextExercise <5) {updateNextExercise(currentExercise +1)}
+    if(currentExercise >1) { updatePreviousExercise (currentExercise -1)}
+  },[currentExercise]);
+
+
+
   return (
-    <DisplayedExercise exercise={newdata[exerciseView]} goToNextExerc ={goToNextExerc} goToPrevExerc={goToPrevExerc} /> 
+    <DisplayedExercise exercise={data[currentExercise]} nextExercise = {data[nextExercise]}  previousExercise={data[previousExercise]} 
+    goToNextExerc ={goToNextExerc} goToPrevExerc={goToPrevExerc}  /> 
   )
 }

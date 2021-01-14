@@ -4,6 +4,7 @@ import {createStackNavigator} from '@react-navigation/stack';
 import HomeScreen from '../screens/HomeScreen';
 import ReflectionExerciseList from '../screens/ReflectionExerciseList';
 import Exercise from '../screens/Exercise'
+import CameraScreen from '../screens/CameraScreen'
 
 const MainStack = createStackNavigator();
 
@@ -19,6 +20,7 @@ export function MainNavigator() {
         <MainStack.Screen name={'Home'}  component={HomeScreen} />
         <MainStack.Screen name={'ReflectionExerciseList'}  component={ReflectionExerciseList} />
         <MainStack.Screen name ={'Exercise'} component ={Exercise}/> 
+        {/* <MainStack.Screen name = {'Camera'} component={CameraScreen}/>  */}
       </MainStack.Navigator>
     // </NavigationContainer>
     )

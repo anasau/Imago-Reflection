@@ -48,7 +48,7 @@ export default function() {
               }
             }}
           />
-          <TabNavigator/>
+            <TabNavigator/> 
           </UserContext.Provider>
         )}
       </RootStack.Screen>

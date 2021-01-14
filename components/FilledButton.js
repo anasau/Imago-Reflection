@@ -23,6 +23,6 @@ const styles = StyleSheet.create({
   text: {
     color:Colors.primary, 
     fontWeight: '500',
-    fontSize: 16,
+    fontSize: 12,
   },
 });
