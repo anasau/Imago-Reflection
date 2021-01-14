@@ -35,7 +35,7 @@ app.use((error, req, res, next) => {
 const mongoConnection= 'mongodb+srv://ana_codeworks:1q2w3e4r@cluster0.cqkmv.mongodb.net/users?retryWrites=true&w=majority';
 
 
-mongoose.connect(mongoConnection, {useNewUrlParser:true, useUnifiedTopology:true, })
+mongoose.connect(mongoConnection, {useNewUrlParser:true, useUnifiedTopology:true,   useCreateIndex: true,})
   .then((result)=> {
     console.log('connected to db');
     app.listen(PORT,  ()=> { 

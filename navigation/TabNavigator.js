@@ -35,7 +35,7 @@ export function TabNavigator() {
       options = {{ tabBarIcon: () => <Icon name="home" color='red' size={20}/> 
      }} 
       />
-      <Tab.Screen name="Profile" component={ReflectionExerciseList}/>
+      <Tab.Screen name="Profile" component={ProfileScreen}/>
     </Tab.Navigator>
   ); 
 }

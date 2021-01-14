@@ -14,7 +14,7 @@ export function ImageComponent ({source}) {
 const styles = StyleSheet.create({
    
   image: { 
-    width:150, 
+    width:310, 
     height:150,
     marginVertical:10, 
   }

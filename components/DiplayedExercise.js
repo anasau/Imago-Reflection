@@ -27,12 +27,11 @@ function goBackOneStep(){
         <AntDesign name="rightcircleo" size={24} color="black" onPress ={() => props.goToNextExerc()} />
         </View>
       <Text style = {styles.question}> {props.exercise.title} </Text>
-      <ImageComponent source = {props.exercise.image} /> 
+      <ImageComponent source = {props.exercise.image} style ={styles.image}/> 
       <View style = {styles.view}> 
       <Text style = { styles.exercise}>  {props.exercise.text} </Text>
       </View>
      <StartExerciseButton title='Start reflecting' onPress={() => navigateToExercise()}/> 
-    
     </HomeScreenContainer>
 )
 
@@ -81,7 +80,12 @@ const styles = StyleSheet.create({
    question: { 
      backgroundColor:Colors.primary, 
      color:'white',
-     fontWeight:'bold'
+     fontWeight:'bold', 
+    //  maxWidth:'90%', 
+     textAlign:'center'
+   }, 
+   image: { 
+     width:'80%', 
    }
   
 });
