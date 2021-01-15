@@ -6,29 +6,34 @@ const Schema = mongoose.Schema;
 const reflectionSchema =  new Schema ({
     exercise1: {
     type: String,
-    required: false 
+    required:true
   },
-  exercise2: {
+    exercise2: {
     type: String,
-    required: false 
-  },  exercise3: {
+    required:true  
+  },
+    exercise3: {
     type: String,
-    required: false 
-  }, exercise4: {
+    required:true  
+  }, 
+    exercise4: {
     type: String,
-    required: false 
-  }, exercise5: {
+    required:true  
+  }, 
+    exercise5: {
     type: String,
-    required: false 
-  }, exercise6: {
+    required:true  
+  }, 
+    exercise6: {
     type: String,
-    required: false 
-  }, exercise7: {
+    required:true  
+  }, 
+    exercise7: {
     type: String,
-    required: false 
+    required:true  
   },
 
-}); 
+}, {timestamps:true}); 
 
 // this creates and database and also provide all the methods which we can use to add / extract data 
 const ReflectionDb = mongoose.model('newDb', reflectionSchema); 

@@ -33,7 +33,7 @@ export function AuthScreen({navigation}) {
       <Input
         style={styles.input}
         placeholder={'Password'}
-        secureTextEntry
+        secureTextEntry={true}
         value={password}
         onChangeText={setPassword}
       />

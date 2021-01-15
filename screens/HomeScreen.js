@@ -20,7 +20,7 @@ export default function HomeScreen() {
   const navigation = useNavigation();
 
   function navigateToExerciseList() {
-      navigation.navigate("ReflectionExerciseList");
+      navigation.navigate("ExerciseNavigator");
   }
 
 return (

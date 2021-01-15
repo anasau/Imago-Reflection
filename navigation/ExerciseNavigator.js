@@ -5,22 +5,22 @@ import HomeScreen from '../screens/HomeScreen';
 import ReflectionExerciseList from '../screens/ReflectionExerciseList';
 import Exercise from '../screens/Exercise'
 import InputScreen from '../screens/InputScreen'
-import { ExerciseNavigator } from './ExerciseNavigator';
 
-const MainStack = createStackNavigator();
 
-export function MainNavigator() {
+const ExerciseStack = createStackNavigator();
+
+export function ExerciseNavigator() {
 
   return (
     // <NavigationContainer> 
-      <MainStack.Navigator
+      <ExerciseStack.Navigator
         mode={'modal'}
         screenOptions={{
           headerShown: false,
         }}>
-        <MainStack.Screen name={'Home'}  component={HomeScreen} />
-        
-        <MainStack.Screen name={'ExerciseNavigator'} component={ExerciseNavigator}   options={{ title: 'Imago reflection',  headerStyle: {
+        <ExerciseStack.Screen name={'ReflectionExerciseList'}  component={ReflectionExerciseList} />
+        <ExerciseStack.Screen name ={'Exercise'} component ={Exercise}/> 
+        <ExerciseStack.Screen name={'Input'} component={InputScreen}   options={{ title: 'Add reflection',  headerStyle: {
             backgroundColor: '#f4511e',
           },
           headerTintColor: '#fff',
@@ -28,8 +28,8 @@ export function MainNavigator() {
           fontWeigth:'bold'}
          }}
             /> 
-        {/* <MainStack.Screen name = {'Camera'} component={CameraScreen}/>  */}
-      </MainStack.Navigator>
+        {/* <ExerciseStack.Screen name = {'Camera'} component={CameraScreen}/>  */}
+      </ExerciseStack.Navigator>
     // </NavigationContainer>
     )
   }

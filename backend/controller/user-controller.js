@@ -22,16 +22,23 @@ const getUsers = async (req, res, next) => {
 };
 
 const signup = async (req, res, next) => {
-  const errors = validationResult(req);
-  if (!errors.isEmpty()) {
-    return next(
-      new HttpError('Invalid inputs passed, please check your data.', 422)
-    );
-  }
+
+  //???what rules are there embadded into validatioon Result?
+  // const errors = validationResult(req);
+  // console.log(errors, 'errors')
+
+  // if (!errors.isEmpty()) {
+  //   return next(
+  //     new HttpError('Invalid inputs passed, please check your data.', 422)
+  //   );
+  // }
+
 
   const { email, password } = req.body;
 
   let existingUser;
+  console.log(email, 'email')
+
   try {
     existingUser = await User.findOne({ email: email });
   } catch (err) {
@@ -105,7 +112,6 @@ const signup = async (req, res, next) => {
 const login = async (req, res, next) => {
   console.log('hello?>>')
   const { email, password } = req.body;
-  console.log(email, 'email')
   let existingUser;
   
   try {

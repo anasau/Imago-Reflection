@@ -10,7 +10,6 @@ export function CountDown (props) {
 
     <View> 
       <Text style={styles.text}> {props.remainingTime }' </Text>
-      {/* <Text>{counterOn} </Text> */}
       <View  style={{flexDirection:'row'}}> 
         <Ionicons name="ios-play-back-circle-outline" size={24} color="black" />
           <Ionicons name= "play-circle-outline" size={24} color="black"  onPress = {() => props.count()}/>

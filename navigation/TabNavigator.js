@@ -16,7 +16,8 @@ export function TabNavigator() {
       activeTintColor: Colors.primary,
       inactiveTintColor: 'grey',
       style: {
-        width:'50%',
+      width:'50%',
+      // border:'solidblack', 
       elevation: 0,
       backgroundColor:  'transparent',
       height:35,

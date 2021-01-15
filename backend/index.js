@@ -14,8 +14,8 @@ app.use(cors());
 
 app.use(bodyParser.json());
 
-// app.use('/auth/', placesRoutes);
-app.use('/auth/users', () => {console.log ('we got to app use')}, usersRouter);
+app.use('/reflection', mainRouter);
+app.use('/auth/users', usersRouter);
 
 
 app.use((req, res, next) => {
@@ -32,7 +32,7 @@ app.use((error, req, res, next) => {
 });
 
 // connecting to the mongodb db with mongoose 
-const mongoConnection= 'mongodb+srv://ana_codeworks:1q2w3e4r@cluster0.cqkmv.mongodb.net/users?retryWrites=true&w=majority';
+const mongoConnection= 'mongodb+srv://ana_codeworks:1q2w3e4r@cluster0.cqkmv.mongodb.net/test?retryWrites=true&w=majority';
 
 
 mongoose.connect(mongoConnection, {useNewUrlParser:true, useUnifiedTopology:true,   useCreateIndex: true,})

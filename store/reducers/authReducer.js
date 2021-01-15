@@ -1,3 +1,4 @@
+// require('dotenv').config()
 import React from 'react';
 import axios from 'axios';
 import * as SecureStore from 'expo-secure-store';
@@ -10,16 +11,15 @@ export function createAction(type, payload) {
   };
 }
 
-// import {sleep} from '../utils/sleep';
-
 export function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
 
 
-const BASE_URL = 'http://192.168.68.111:3001'
 // reducer 
 export function authReducer() {
+  const BASE_URL =  'http://192.168.68.111:3001'
+
   const [state, dispatch] = React.useReducer(
     (state, action) => {
       switch (action.type) {
@@ -53,20 +53,17 @@ export function authReducer() {
 
       // 2
       login: async (email, password) => {
-        console.log('do we get here?')
         console.log(email, password)
         const {data} = await axios.post(`${BASE_URL}/auth/users/login`, {
           email, 
           password
         })
-        console.log(data, 'data retrieved')
         // if email and password is correct 
         // extract token data from the user based on email and password  // and save it 
         const user = {
           email: data.email,
           token: data.token
         }
-        console.log('user', 'user got 66 ')
 
         ///This is to keep you loged in if app is closed 
         await SecureStore.setItemAsync('user', JSON.stringify(user));
@@ -96,7 +93,7 @@ export function authReducer() {
   );
 
   React.useEffect(() => {
-    sleep(2).
+    sleep(2000).
     then(() => {
      SecureStore.getItemAsync('user').then(user => {
         if (user) {

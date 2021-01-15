@@ -17,13 +17,14 @@ export function CompletedExercise ({title, onPress}) {
 
 const styles = StyleSheet.create({
   container: {
-    width: '50%',
+    width: '100%',
     height:40, 
     alignItems: 'center',
     justifyContent: 'center',
     padding: 20,
     borderRadius: 8,
     backgroundColor:Colors.primary, 
+    marginBottom:20
   },
   text: {
     color: 'white',

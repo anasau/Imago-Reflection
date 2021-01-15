@@ -1,16 +1,16 @@
 const express = require('express'); 
 const router = express.Router();
 
-const postsDb = require('../controller/controller'); 
+const ReflectionDb = require('../controller/controller'); 
 
 //for this router - run these functions 
-router.get('/posts', postsDb.getAll);
+router.get('/', ReflectionDb.getAll);
 
-router.post('/post', postsDb.postOne);
+router.post('/', ReflectionDb.postOne);
 
-router.delete('/delete/:id', postsDb.delete);
+// router.delete('/delete/:id', postsDb.delete);
 
-router.put ('/upvote/:id',postsDb.upVote )
+// router.put('/submit/:id', ReflectionDb.update )
 
 
 module.exports = router; 
