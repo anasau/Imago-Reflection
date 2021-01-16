@@ -1,6 +1,6 @@
 import React from 'react'
 import {View, Text, StyleSheet, TextInput} from 'react-native'
-import {Input} from '../components/Input'
+import {TextButton} from '../components/TextButton'
 import Colors from '../constants/Colors'
 import {HomeScreenContainer} from '../components/HomeScreenContainer'
 import {CompletedExercise} from '../components/CompletedExercise'
@@ -17,7 +17,7 @@ export default function InputScren ({route}) {
   const {name, remainingTime} = route.params
 
   const dispatch = useDispatch();
-  const [text, setText] = React.useState("");
+  const [text, setText] = React.useState('');
 
 
     // 1. take the input and post it to the store and then to the database 
@@ -25,26 +25,30 @@ export default function InputScren ({route}) {
     //change add input to edit input 
   
 
+  const closePage =() => {
+    navigation.navigate("Exercise",  {name:name} );
+  }
+
   const  addInput= (e) => {
-
-    dispatch({
-      type: "ADD_INPUT",
-      name, 
-      text
-    });
-
-    setText("");
-    navigation.navigate("ReflectionExerciseList",  {name:name} );
-
+     if (text.length>1) {
+      dispatch({
+        type: "ADD_INPUT",
+        name, 
+        text
+      });
+  
+      setText("");
+      navigation.navigate("ReflectionExerciseList",  {name:name} );
+      //potentially pass next excercise so when the page is open - the correct i.e. next exercise is already displayed. 
+    } 
   };
-  // setText(e.target.value)
-
-  console.log('new console', store.getState())
   
   return (
     <HomeScreenContainer> 
+    <Text> {name} </Text>
     <Text> {remainingTime} </Text>
     <CompletedExercise title ='Save input' onPress = {() => { addInput()}}/> 
+    <TextButton title='close page' style={styles.closeButton} onPress={closePage}></TextButton>
     <TextInput style={styles.textInput}  value={text} onChangeText={e =>setText(e)}/> 
     </HomeScreenContainer>
 
@@ -55,6 +59,9 @@ const styles = StyleSheet.create({
 textInput: {
   backgroundColor:Colors.grey,
    flex:1, width:'100%',
-    padding:10,  }
+    padding:10,  }, 
+    closeButton:{
+      marginVertical:0, 
+      padding:10,}
 })
 

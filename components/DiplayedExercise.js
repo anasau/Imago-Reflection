@@ -8,6 +8,7 @@ import {StartExerciseButton} from '../components/StartExerciseButton'
 import { useNavigation } from '@react-navigation/native';
 import { AntDesign } from '@expo/vector-icons';
 import {Instruction} from '../components/Instruction'
+import {TextButton} from '../components/TextButton'
 
 export function DisplayedExercise (props) { 
   const navigation = useNavigation();
@@ -38,6 +39,7 @@ function goBackOneStep(){
       <Text style = { styles.exercise}>  {text} </Text>
       </View>
      <StartExerciseButton title='Start reflecting' onPress={() => navigateToExercise()}/> 
+     <TextButton title='back to Homepage' onPress={() => goBackOneStep()}  style ={{fontSize:12, color:'black'}}/> 
     </HomeScreenContainer>
 )
 
@@ -84,6 +86,13 @@ const styles = StyleSheet.create({
    }, 
    image: { 
      width:'80%', 
-   }
+   }, container: {
+    width: '50%',
+    height:30, 
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: 20,
+    borderRadius: 8,
+  },
   
 });
