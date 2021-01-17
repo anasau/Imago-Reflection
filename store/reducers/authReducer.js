@@ -53,7 +53,6 @@ export function authReducer() {
 
       // 2
       login: async (email, password) => {
-        console.log(email, password)
         const {data} = await axios.post(`${BASE_URL}/auth/users/login`, {
           email, 
           password
@@ -79,14 +78,10 @@ export function authReducer() {
 
       //1 
       register: async (email, password) => {
-        // await sleep(2000)        console.log('user', 'user got 66 ')
-        console.log('user', 'user got 87 ')
-
         await axios.post(`${BASE_URL}/auth/users/signup`, {
           email,
           password,
         })
-        console.log('user', 'user got 93')
       },
     }),
     [],
@@ -100,7 +95,6 @@ export function authReducer() {
           dispatch(createAction('SignIn', JSON.parse(user)));
         }
         dispatch(createAction('set-loading', false));
-        console.log(user, 'user console')
       });
     });
   }, []);

@@ -46,12 +46,11 @@ export default function() {
             color ={Colors.primary}
             onPress={async () => {
               try {
-                // setLoading(true);
+                setLoading(true);
                 await logout()
               } catch (e) {
-                console.log(e)
-                // setError(e.message);
-                // setLoading(false);
+                setError(e.message);
+                setLoading(false);
               }
             }}
           />

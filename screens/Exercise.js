@@ -7,29 +7,55 @@ import Colors  from '../constants/Colors'
 import {CompletedExercise} from '../components/CompletedExercise';
 import { useNavigation } from '@react-navigation/native';
 import {CountDown} from '../components/countdown'
+import {store} from '../store/ReduxStore'
+import {postInput, updateInput} from '../store/reducers/serverReducer';
 
 export default function Exercise ({route}) {
 
+
   const {name, previousExercise, nextExercise} = route.params
+  // functions to save the user input 
+  const [Data, updateData] =useState('')
+  const [message, updateMessage] = useState('')
+ 
+  const completeReflection = () => {
 
-  const navigation = useNavigation();
-  
-  function goBackOneStep() {
-    navigation.goBack()
+    const dataStore =store.getState(); 
+    const data = {
+      exercise1:dataStore[0].input, 
+      exercise2:dataStore[1].input, 
+      exercise3:dataStore[2].input,
+      exercise4:dataStore[3].input, 
+      exercise5:dataStore[4].input, 
+      exercise6:dataStore[5].input, 
+      exercise7:dataStore[6].input, 
+   
+    }
+    
+      console.log('new el is beig created ')
+      const result= postInput('/reflection',data).then(data => updateData(data))
+      return result; 
+   }  
+
+const updateReflection = (id) => { 
+  const dataStore =store.getState(); 
+  const data = {
+    exercise1:dataStore[0].input, 
+    exercise2:dataStore[1].input, 
+    exercise3:dataStore[2].input,
+    exercise4:dataStore[3].input, 
+    exercise5:dataStore[4].input, 
+    exercise6:dataStore[5].input, 
+    exercise7:dataStore[6].input, 
+ 
   }
 
-  //Add insight and add picture buttons functions - add picture is wip 
-  function openCamera() {
-      navigation.navigate("Home");
-  }
-  
-  function completeReflection () {
-    navigation.navigate("Home");
-  }
-  function addInput() {
-    navigation.navigate("Input",  {name:name,remainingTime:remainingTime} );
-  }
+  console.log('edit is happening ')
+  const edit = updateInput('/reflection/update', Data._id, data).then(data =>updateMessage('Reflection has been successfully submitted.') )
 
+  return edit; 
+}
+ 
 
 //timer 
   const [remainingTime, updateRemainingTime]=useState(90);
@@ -45,12 +71,31 @@ export default function Exercise ({route}) {
     updateCounterOn(false)
   }
 
+  /// this the navigation 
+
+  const navigation = useNavigation();
+  
+  function goBackOneStep() {
+    navigation.goBack()
+  }
+
+  //Add insight and add picture buttons functions - add picture is wip 
+  function openCamera() {
+      navigation.navigate("Home");
+  }
+  
+   
+  function addInput() {
+    navigation.navigate("Input",  {name:name,remainingTime:remainingTime} );
+  }
+
+  // input for Instruction element 
   const instruction ='Before starting this exercise, set a timer. Check tips throughout the exercise or get in touch with the couch for guidance. Enjoy! '
 
   return (
   <HomeScreenContainer> 
-    <CompletedExercise title ='Complete Reflection' onPress = {() => {completeReflection()}}/> 
-    
+    <CompletedExercise title ='Complete Reflection' onPress = {() => {Data._id.length>5 ? updateReflection() : completeReflection()}}/> 
+    <Text> {message} </Text>
     <Instruction> {instruction} </Instruction>
       <Image source={require('../assets/reflection.png')} style ={{width:150, height:150 }}/> 
     <View style = {styles.view}> 

@@ -6,31 +6,31 @@ import {UserContext} from '../../context/UserContext';
 const BASE_URL =  'http://192.168.68.111:3001'
 
 
-
 export function getData (endpoint, initialValue ='') {
-  const {token} = React.useContext(UserContext);
+  // const {token} = React.useContext(UserContext);
 
-  const [data, setData] = React.useState(initialValue);
-
-  React.useEffect(() => {
-    axios
+  // const [data, setData] = React.useState(initialValue);
+  const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI1ZmY1ZGRjMTJjY2UxZDE3YzQxOTMzNGUiLCJlbWFpbCI6ImFuYXNhdUBnbWFpbC5jb20iLCJpYXQiOjE2MTA4MjIxNDIsImV4cCI6MTYxMDgzMjk0Mn0.lNcS3yg1G4KisU18Mh1wgX_lOVNLbTWWcVj4fj4WbRE"
+  // React.useEffect(() => {
+    const response = axios
       .get(`${BASE_URL}${endpoint}`, {
         headers: {
           Authorization: `bearer ${token}`,
         },
       })
       .then(({data}) => {
-        setData(data);
-      });
-  }, [token, endpoint]);
-  return data;
-  
+         return data});
+  // }, [token, endpoint]);
+  return response;
 }
 
-export  async function postInput (endpoint, data ) {
-  const {token} = React.useContext(UserContext);
 
-  const {response} = await axios.post(`${BASE_URL}${endpoint}`, {
+
+export function postInput (endpoint, data ) {
+  const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI1ZmY1ZGRjMTJjY2UxZDE3YzQxOTMzNGUiLCJlbWFpbCI6ImFuYXNhdUBnbWFpbC5jb20iLCJpYXQiOjE2MTA4MjIxNDIsImV4cCI6MTYxMDgzMjk0Mn0.lNcS3yg1G4KisU18Mh1wgX_lOVNLbTWWcVj4fj4WbRE"
+  // const {token} = React.useContext(UserContext);
+  // const [resp, setResp] = React.useState('');
+  const response =  axios.post(`${BASE_URL}${endpoint}`, {
 
     exercise1:data.exercise1, 
     exercise2:data.exercise2,  
@@ -45,10 +45,36 @@ export  async function postInput (endpoint, data ) {
       'Content-Type': "application/json", 
       'Authorization': `bearer ${token}`
     },
-  })
+  }).then(({data}) => {
+  return data })
 
   return response; 
 }
 
 
 
+
+export function updateInput (endpoint, id, data ) {
+  const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI1ZmY1ZGRjMTJjY2UxZDE3YzQxOTMzNGUiLCJlbWFpbCI6ImFuYXNhdUBnbWFpbC5jb20iLCJpYXQiOjE2MTA4MjIxNDIsImV4cCI6MTYxMDgzMjk0Mn0.lNcS3yg1G4KisU18Mh1wgX_lOVNLbTWWcVj4fj4WbRE"
+  // const {token} = React.useContext(UserContext);
+  // const [resp, setResp] = React.useState('');
+  const response =  axios.put(`${BASE_URL}${endpoint}${id}`, {
+
+    exercise1:data.exercise1, 
+    exercise2:data.exercise2,  
+    exercise3:data.exercise3, 
+    exercise4:data.exercise4, 
+    exercise5:data.exercise5, 
+    exercise6:data.exercise6, 
+    exercise7:data.exercise7, 
+
+  }, {
+    headers: {
+      'Content-Type': "application/json", 
+      'Authorization': `bearer ${token}`
+    },
+  }).then(({data}) => {
+  return data })
+
+  return response; 
+}

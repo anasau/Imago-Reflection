@@ -37,7 +37,6 @@ const signup = async (req, res, next) => {
   const { email, password } = req.body;
 
   let existingUser;
-  console.log(email, 'email')
 
   try {
     existingUser = await User.findOne({ email: email });
@@ -110,7 +109,6 @@ const signup = async (req, res, next) => {
 };
 
 const login = async (req, res, next) => {
-  console.log('hello?>>')
   const { email, password } = req.body;
   let existingUser;
   

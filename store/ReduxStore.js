@@ -1,35 +1,38 @@
 
 
 import React from "react";
-import { createStore } from "redux";
+import { createStore, applyMiddleware } from "redux";
+import thunk from 'redux-thunk';
+import {getData} from '../store/reducers/serverReducer'
 
 
+      
 
+// get data and  update the initial state every time use logs in with {name:'Exercise 1', input: 'response.exercise1'}
 const initialState = [
-//change this 
-  {
-    name:'Exercise 1',
-    input:'',   
-  },   {
-    name:'Exercise 2',
-    input:'',   
-  },   {
-    name:'Exercise 3',
-    input:'',   
-  },   {
-    name:'Exercise 4',
-    input:'',   
-  },    {
-    name:'Exercise 5',
-    input:'',   
-  }, {
-    name:'Exercise 6',
-    input:'',   
-  }, 
+    {
+    name:'exercise1',
+    input:'Complete exercise',   
+     },   {
+    name:'exercise2',
+    input:'Complete exercise',
+    },   {
+    name:'exercise3',
+    input:'Complete exercise',
+    },   {
+    name:'exercise4',
+    input:'Complete exercise',
+    },    {
+    name:'exercise5',
+    input:'Complete exercise',
+    }, {
+    name:'exercise6',
+    input:'Complete exercise',
+    }, 
 {
-    name:'Exercise 7',
-    input:'',   
-  }
+    name:'exercise7',
+    input:'Complete exercise',
+    },
 ]
  
 export function reducer(state = initialState, action) {
@@ -42,11 +45,25 @@ export function reducer(state = initialState, action) {
             return exercise
           }
         }) 
+      case "GET_DATABASE_DATA":
+        return state.map((exercise) => {
+        for (let key in action.payload ) {
+          if (exercise.name === key) { 
+            return {...exercise, input:action.payload[key]}
+          } else {return exercise}
+        }
+      })
+
       default:
         return state;
     }
+
+
 }
  
 
 
-export const store = createStore(reducer);
+
+export const store = createStore(reducer,  applyMiddleware(thunk));
+
+

@@ -5,7 +5,7 @@ import HomeScreen from '../screens/HomeScreen';
 import ReflectionExerciseList from '../screens/ReflectionExerciseList';
 import Exercise from '../screens/Exercise'
 import InputScreen from '../screens/InputScreen'
-
+import CameraScreen from '../screens/CameraScreen'
 
 const ExerciseStack = createStackNavigator();
 
@@ -28,7 +28,7 @@ export function ExerciseNavigator() {
           fontWeigth:'bold'}
          }}
             /> 
-        {/* <ExerciseStack.Screen name = {'Camera'} component={CameraScreen}/>  */}
+        <ExerciseStack.Screen name = {'Camera'} component={CameraScreen}/> 
       </ExerciseStack.Navigator>
     // </NavigationContainer>
     )

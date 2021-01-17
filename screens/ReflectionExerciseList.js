@@ -2,7 +2,10 @@ import React, {useState, useEffect} from 'react';
 import exercises from '../store/exercises'
 import {DisplayedExercise} from '../components/DiplayedExercise'
 
-export default function ReflectionExerciseList ({}) { 
+export default function ReflectionExerciseList ({route}) { 
+
+  // const {name} = route.params
+  //if there is data here - last completed exercise which is coming from the input page we should right away shwo the description for the next exercise 
 
   const data = exercises; 
 

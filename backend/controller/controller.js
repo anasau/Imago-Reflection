@@ -14,6 +14,7 @@ exports.getAll = async (req, res) => {
 
 };
 
+
 // exports.delete =  async (req, res ) =>  { 
 //   const {id}= req.params;
 //   try { 
@@ -28,10 +29,11 @@ exports.getAll = async (req, res) => {
 // }; 
 
 exports.postOne =  async (req, res) => { 
-  const {exercise1, exercise2, exercise3, exercise4, exercise5, exercise6,exercise7} = req.body;
+  const {id, exercise1, exercise2, exercise3, exercise4, exercise5, exercise6,exercise7} = req.body;
   
   try {
     const reflection = await ReflectionDb.create({
+      id:id,
       exercise1:exercise1, 
       exercise2:exercise2, 
       exercise3:exercise3, 
@@ -51,17 +53,17 @@ exports.postOne =  async (req, res) => {
 
 
 
-// exports.update =  async (req, res) => { 
+exports.update =  async (req, res) => { 
 
-//   const { id,exercise1, exercise2, exercise3, exercise4, exercise5, exercise6,exercise7} = req.body;
-//   try {
-//     const exercise = await ReflectionDb.findByIdAndUpdate({id:id}, 
-//       {exercise:input}, {new:true});  
-//     res.status(200); 
-//     res.send (exercise);
-//   } catch (e) {
-//     res.status(500);
-//     res.send(e); 
-//   }
-// };
+  const { _id,exercise1, exercise2, exercise3, exercise4, exercise5, exercise6,exercise7} = req.body;
+  try {
+    const response = await ReflectionDb.findByIdAndUpdate({_id:_id}, 
+      {exercise1, exercise2, exercise3, exercise4, exercise5, exercise6, exercise7}, {new:true});  
+    res.status(200); 
+    res.send (response);
+  } catch (e) {
+    res.status(500);
+    res.send(e); 
+  }
+};
 
