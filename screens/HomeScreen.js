@@ -12,6 +12,7 @@ import {Loading} from '../components/Loading';
 import Colors  from '../constants/Colors'
 import { useNavigation } from '@react-navigation/native';
 import { TextButton } from '../components/TextButton';
+import {store} from '../store/ReduxStore'
 
 export default function HomeScreen() {
 

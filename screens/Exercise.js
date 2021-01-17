@@ -15,7 +15,8 @@ export default function Exercise ({route}) {
 
   const {name, previousExercise, nextExercise} = route.params
   // functions to save the user input 
-  const [Data, updateData] =useState('')
+  const [Data, updateData] =useState(store.getState().filter(object => object.name==='_id')[0].input)
+  console.log(Data)
   const [message, updateMessage] = useState('')
  
   const completeReflection = () => {

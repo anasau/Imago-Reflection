@@ -6,7 +6,7 @@ import {UserContext} from '../../context/UserContext';
 const BASE_URL =  'http://192.168.68.111:3001'
 
 
-export function getData (endpoint, initialValue ='') {
+export function getData (endpoint) {
   // const {token} = React.useContext(UserContext);
 
   // const [data, setData] = React.useState(initialValue);

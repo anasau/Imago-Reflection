@@ -8,7 +8,6 @@ import {getData} from '../store/reducers/serverReducer'
 
       
 
-// get data and  update the initial state every time use logs in with {name:'Exercise 1', input: 'response.exercise1'}
 const initialState = [
     {
     name:'exercise1',
@@ -33,6 +32,10 @@ const initialState = [
     name:'exercise7',
     input:'Complete exercise',
     },
+    {
+      name:'_id', 
+      input:''
+    }
 ]
  
 export function reducer(state = initialState, action) {
@@ -50,8 +53,8 @@ export function reducer(state = initialState, action) {
         for (let key in action.payload ) {
           if (exercise.name === key) { 
             return {...exercise, input:action.payload[key]}
-          } else {return exercise}
-        }
+          } 
+        } return exercise 
       })
 
       default:
