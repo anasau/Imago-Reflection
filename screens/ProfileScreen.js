@@ -44,7 +44,7 @@ export function ProfileScreen ({navigation}) {
 
       }
     
-    {lastReflection.length> 1 ?  Array.from(lastReflection).map((each) => <Touchable key={each._id}> {each.createdAt} </Touchable> ) : <Text key='kADCJH'> No previous reflections found </Text> }
+    {lastReflection.length> 1 ?  Array.from(lastReflection).map((each) => <Text key={each._id}> {each.createdAt} </Text> ) : <Text key='kADCJH'> No previous reflections found </Text> }
   
       </View>
     {/* <ProgressComponent/>  */}
