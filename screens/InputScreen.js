@@ -1,10 +1,10 @@
-import React from 'react'
+import React, {useState} from 'react'
 import {View, Text, StyleSheet, TextInput} from 'react-native'
 import {TextButton} from '../components/TextButton'
 import Colors from '../constants/Colors'
 import {HomeScreenContainer} from '../components/HomeScreenContainer'
 import {CompletedExercise} from '../components/CompletedExercise'
-import {useDispatch, useSelector} from "react-redux";
+import {useDispatch} from "react-redux";
 import { useNavigation } from '@react-navigation/native';
 import {store} from '../store/ReduxStore'
 import {getData, postInput} from '../store/reducers/serverReducer';
@@ -14,6 +14,7 @@ export default function InputScren ({route}) {
   const navigation = useNavigation();
 
   const {name, remainingTime} = route.params
+  const [nextExercise, updateNextExercise] =useState(+name.slice(-1)+1)
   let lowerCaseName=name.replace(/\s/g, '').toLowerCase(); 
   const dispatch = useDispatch();
 
@@ -21,10 +22,7 @@ export default function InputScren ({route}) {
   const textinput = storey.filter(exercise => exercise.name ===lowerCaseName)[0].input
   const [text, setText] = React.useState(textinput);
 
-    // 1. take the input and post it to the store and then to the database 
-    // close the window by navigating to previous page
-    //change add input to edit input 
-  
+
   const closePage =() => {
     navigation.navigate("Exercise",  {name:name} );
   }
@@ -34,10 +32,10 @@ export default function InputScren ({route}) {
       if (text.length>1) {
         dispatch({
           type: "ADD_INPUT",
-          name, 
+          name:lowerCaseName, 
           text
         }) 
-        navigation.navigate("Exercise", {name:lowerCaseName} );
+        navigation.navigate("Exercise", {name:'Exercise '+ nextExercise});
         
         // potentially pass next excercise so when the page is open - the correct i.e. next exercise is already displayed.
     } 

@@ -9,11 +9,14 @@ import { useNavigation } from '@react-navigation/native';
 import {CountDown} from '../components/countdown'
 import {store} from '../store/ReduxStore'
 import {postInput, updateInput} from '../store/reducers/serverReducer';
+import exercises from '../store/exercises'
+import { update } from '../backend/models/model';
 
 export default function Exercise ({route}) {
 
 
   const {name, previousExercise, nextExercise} = route.params
+  const [NAME, UDPATENAME] =useState(name)
   // functions to save the user input 
   const [id, updateId] =useState(store.getState().filter(object => object.name==='_id')[0].input)
   const [message, updateMessage] = useState('')
@@ -29,9 +32,8 @@ export default function Exercise ({route}) {
       exercise5:dataStore[4].input, 
       exercise6:dataStore[5].input, 
       exercise7:dataStore[6].input, 
-   
     }
-    
+      updateMessage('')
       console.log('new el is beig created ')
       const result= postInput('/reflection',data).then(data => updateMessage(data))
       return result; 
@@ -50,7 +52,7 @@ const updateReflection = () => {
     exercise7:dataStore[6].input, 
  
   }
-
+  updateMessage('')
   console.log('edit is happening with data', data)
   const edit = updateInput('/reflection', data).then(data =>updateMessage('Reflection has been successfully submitted.') )
   return edit; 
@@ -62,12 +64,14 @@ const updateReflection = () => {
   const [counterOn, updateCounterOn]=useState(false); 
 
   function count ()  {
-    setInterval( () => updateRemainingTime(remaining => remaining -1), 1000*6)
-    updateCounterOn(true)
+  
+      updateCounterOn(true)
+      setInterval( () => updateRemainingTime(remaining => remaining -1), 1000)
+    
   }
 
   function pauseCount () {
-    clearInterval(count);
+    clearInterval(count)
     updateCounterOn(false)
   }
 
@@ -75,18 +79,29 @@ const updateReflection = () => {
 
   const navigation = useNavigation();
   
+  // passing the last exercise so the page updates accordingly 
   function goBackOneStep() {
-    navigation.goBack()
-  }
+    updateMessage('')
+    navigation.navigate("ReflectionExerciseList", {lastexercise:NAME})
+    }
 
   //Add insight and add picture buttons functions - add picture is wip 
   function openCamera() {
-      navigation.navigate("Home");
+      updateMessage('')
+      navigation.navigate("Camera", {name, NAME});
   }
   
    
   function addInput() {
-    navigation.navigate("Input",  {name:name,remainingTime:remainingTime} );
+    updateMessage('')
+    navigation.navigate("Input",  {name:NAME,remainingTime:remainingTime, previousExercise:previousExercise.name, nextExercise:nextExercise.name} );
+  }
+
+  function nextExerciseFunc () { 
+    updateMessage('')
+    if(NAME.slice(-1)<7) {
+      UDPATENAME(NAME=> NAME.slice(0,-1)+Number(+NAME.slice(-1)+1))
+    }
   }
 
   // input for Instruction element 
@@ -95,17 +110,17 @@ const updateReflection = () => {
   return (
   <HomeScreenContainer> 
     <CompletedExercise title ='Complete Reflection' onPress = {() => {id.length>5 ? updateReflection() : completeReflection()}}/> 
-    <Text style ={{color:'blue', marginVertical:10, }}> {message} </Text>
+    <Text style ={{color:'blue', marginVertical:10, }}> {message} </Text> 
     <Instruction> {instruction} </Instruction>
       <Image source={require('../assets/reflection.png')} style ={{width:150, height:150 }}/> 
     <View style = {styles.view}> 
-      <FilledButton title='go back' style={styles.navButton} textStyle={styles.textStyle} onPress={() => goBackOneStep()}> </FilledButton>
-      <CountDown remainingTime ={remainingTime} count={count}  pauseCount={pauseCount}/> 
-      <FilledButton title='go to next exercise' style={styles.navButton} textStyle={{fontSize:12, color:'black'}} 
-      onPress={() => goBackOneStep()}> </FilledButton>
+      <FilledButton title='< exercise list' style={styles.navButton} textStyle={styles.textStyle} onPress={() => goBackOneStep()}> </FilledButton>
+      <CountDown remainingTime ={remainingTime} count={count}  pauseCount={pauseCount} counterOn={counterOn} /> 
+      <FilledButton title='next exercise > ' style={styles.navButton} textStyle={styles.textStyle} 
+      onPress={() => nextExerciseFunc()}> </FilledButton>
     
     </View>
-    <Text style = {styles.title} > {name} </Text>
+    <Text style = {styles.title} > {NAME} </Text>
       <FilledButton title='Add Insight' style={styles.inputButton} onPress={() => addInput()}> </FilledButton>
       <FilledButton title='Add Picture' style={styles.inputButton} onPress={() => openCamera()}> </FilledButton>
   </HomeScreenContainer>
@@ -128,7 +143,7 @@ navButton: {
   marginBottom:20,
   padding:0,  width:'30%'}, 
 
-  textStyle: {fontSize:10, color:'black'}, 
+  textStyle: {fontSize:12, color:Colors.primary}, 
   inputButton:{color:'black', backgroundColor: Colors.accent, width:'80%', height:20,  marginVertical:5, borderRadius:0, }, 
   view:{flexDirection:'row', justifyContent:'space-between', marginBottom:10}
 })

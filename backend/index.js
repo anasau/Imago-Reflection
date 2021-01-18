@@ -9,6 +9,8 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const HttpError = require('./models/http-error');
 
+
+// env doesnt work - need to raise a hr to sort it out 
 const PORT =process.env.PORT || 3001 ;  
 
 

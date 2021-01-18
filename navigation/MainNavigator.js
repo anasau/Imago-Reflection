@@ -6,6 +6,7 @@ import ReflectionExerciseList from '../screens/ReflectionExerciseList';
 import Exercise from '../screens/Exercise'
 import InputScreen from '../screens/InputScreen'
 import { ExerciseNavigator } from './ExerciseNavigator';
+import CameraScreen from '../screens/CameraScreen'
 
 const MainStack = createStackNavigator();
 
@@ -20,15 +21,9 @@ export function MainNavigator() {
         }}>
         <MainStack.Screen name={'Home'}  component={HomeScreen} />
         
-        <MainStack.Screen name={'ExerciseNavigator'} component={ExerciseNavigator}   options={{ title: 'Imago reflection',  headerStyle: {
-            backgroundColor: '#f4511e',
-          },
-          headerTintColor: '#fff',
-          headerTitleStyle: {
-          fontWeigth:'bold'}
-         }}
+        <MainStack.Screen name={'ExerciseNavigator'} component={ExerciseNavigator}
             /> 
-        {/* <MainStack.Screen name = {'Camera'} component={CameraScreen}/>  */}
+        <MainStack.Screen name = {'Camera'} component={CameraScreen}/> 
       </MainStack.Navigator>
     // </NavigationContainer>
     )

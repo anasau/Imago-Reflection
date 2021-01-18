@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import {View, StyleSheet, Text, Modal} from 'react-native';
 import {Heading} from '../components/Heading';
 // import {Input} from '../components/Input';
@@ -20,13 +20,16 @@ export default function HomeScreen() {
   const [loading, setLoading] = React.useState(false);
   const [error, setError] = React.useState('');
   const {logout} = React.useContext(AuthContext);
-  
-  const instruction = 'This is the start of your reflection journey. We will guide you through this process with a set of exercises. You can chose the order in which to do them. Enjoy!'
-      
+  const [state, updateState] = useState( 'Start New Reflection')
+
+
+
+  //navigation
+
   const navigation = useNavigation();
 
   function navigateToExerciseList() {
-      navigation.navigate("ExerciseNavigator");
+      navigation.navigate("ExerciseNavigator", {lastexercise:0});
   }
   
   function navigateToProfile() {
@@ -34,6 +37,15 @@ export default function HomeScreen() {
 }
 
 
+useEffect(() => {
+  updateState('continue reflection...')
+},[store.getState()]) 
+
+const startNew = () => { 
+  console.log('set back store to initial state - dispatch to be implemented')
+}
+
+const instruction = 'This is the start of your reflection journey. We will guide you through this process with a set of exercises. You can chose the order in which to do them. Enjoy!'
 
 return (
   <AuthContainer> 
@@ -57,13 +69,10 @@ return (
         source = {require('../assets/S1B9LKEw.jpeg')}
     />
     <Text style = {styles.container}> {instruction} </Text>
-    <FilledButton title = 'Start New Reflection' style = { styles.startReflection}  onPress={() => navigateToExerciseList() }
+    <FilledButton title = {state} style ={ styles.startReflection}  onPress={() => navigateToExerciseList() }
        textStyle = { {color:'white', fontWeight:'bold'}} /> 
-    {/* <FilledButton title = ' Edit Existing Reflection' style = { styles.startReflection}  onPress={() => navigateToProfile() }
-       textStyle = { {color:'white', fontWeight:'bold'}} /> 
-        */}
-    <TextButton title = 'Edit existing reflections' onPress={() => navigateToProfile() }
-       textStyle = { {color:Colors.primary, fontWeight:'bold'}} /> 
+    <TextButton title = {state ===  'Start New Reflection' ?  'see previous reflections' :'start new reflection'} onPress ={()=> startNew()}
+    /> 
   </AuthContainer>
 )
 
@@ -97,6 +106,9 @@ const styles = StyleSheet.create({
     textAlign:'center', 
     fontSize:16, 
   }, 
+  edit: {
+    backgroundColor:Colors.primary,
+  }
 });
 
 

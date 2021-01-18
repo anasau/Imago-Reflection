@@ -1,120 +1,131 @@
-
-import React, { useState, useEffect, useRef } from 'react';
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
-import { Camera } from 'expo-camera';
+import React, { useState, useEffect } from 'react';
+import { Button, Image, View, Platform, StyleSheet } from 'react-native';
+import {FilledButton} from '../components/FilledButton'
+import * as ImagePicker from 'expo-image-picker';
+import Colors from '../constants/Colors'
+// import Constants from 'expo-constants';
 import * as Permissions from 'expo-permissions';
-import * as MediaLibrary from 'expo-media-library';
+import { AntDesign } from '@expo/vector-icons';
+import { Ionicons } from '@expo/vector-icons';
+import { useNavigation } from '@react-navigation/native';
+import {useDispatch} from "react-redux";
 
-export default  CameraScreen = () => {
-  const [hasPermission, setHasPermission] = useState(null);
-  const [type, setType] = useState(Camera.Constants.Type.back);
+import {store} from '../store/ReduxStore'
 
-  const cam = useRef();
+export default function CameraScreen({route}) {
+  const {name} =route.params
+  const [image, setImage] = useState(null);
+  const navigation = useNavigation();
+  let lowerCaseName=name.replace(/\s/g, '').toLowerCase(); 
+  const [nextExercise, updateNextExercise] =useState(+name.slice(-1)+1)
+  const dispatch = useDispatch();
 
-  const takePicture = async () => {
-    if (cam.current) {
-      const options = {
-        quality: 0.5,
-        base64: true,
-        skipProcessing: true,
-      };
-      let photo = await cam.current.takePictureAsync(options);
-      console.log(cam.current.getAvailablePictureSizesAsync());
-      const source = photo.uri;
 
-      if (source) {
-        cam.current.resumePreview();
-        handleSave(source);
-        console.log('picture source', source);
-      }
-    }
-  };
 
-  const handleSave = async (photo) => {
-    const { status } = await Permissions.askAsync(Permissions.CAMERA_ROLL); //MEDIA_LIBRARY
-    if (status === 'granted') {
-      const proceed = await MediaLibrary.createAssetAsync(photo);
-      MediaLibrary.createAlbumAsync('Pick-it-App Photos', proceed);
-    } else {
-      console.warn('Permission Needed');
-    }
-  };
 
   useEffect(() => {
     (async () => {
-      const { status } = await Camera.requestPermissionsAsync();
-      setHasPermission(status === 'granted');
+      if (Platform.OS !== 'web') {
+        const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
+        if (status !== 'granted') {
+          alert('Sorry, we need camera roll permissions to make this work!');
+        }
+      }
     })();
   }, []);
 
-  if (hasPermission === null) {
-    return <View />;
-  }
-  if (hasPermission === false) {
-    return <Text>No access to camera</Text>;
-  }
-  return (
-    <View style={styles.container}>
-      <Camera ref={cam} style={styles.camera} type={type}>
-        <View style={styles.buttonContainer}>
-          <TouchableOpacity
-            style={styles.flipButton}
-            onPress={() => {
-              setType(
-                type === Camera.Constants.Type.back
-                  ? Camera.Constants.Type.front
-                  : Camera.Constants.Type.back,
-              );
-            }}>
-            <Text style={styles.text}> Flip </Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.captureButton}
-            onPress={() => {
-              takePicture();
-            }}>
-            <Text style={styles.text}> Take picture </Text>
-          </TouchableOpacity>
-        </View>
-      </Camera>
-    </View>
-  );
+  const pickImage = async () => {
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      allowsEditing: true,
+      aspect: [4, 3],
+      quality: 1,
+    });
+
+    console.log(result);
+
+    if (!result.cancelled) {
+      setImage(result.uri);
+    }
+  };
+
+
+  const takeImageHandler = async () => {
+    const hasPermission = await verifyPermissions();
+    if (!hasPermission) {
+        return;
+    }
+    const image = await ImagePicker.launchCameraAsync({
+      allowsEditing: false,
+      // aspect: [9, 12],
+      quality: 1
+    });
+
+    setImage(image.uri);
+  };
+
+  function addInput () {
+    if (image) {
+      dispatch({
+        type: "ADD_INPUT",
+        name:lowerCaseName, 
+        text:image
+      }) 
+      console.log(store.getState())
+
+      navigation.navigate("Exercise", {name:'Exercise '+ nextExercise});
+  } 
 };
 
+  const verifyPermissions = async () => {
+    const result = await Permissions.askAsync(Permissions.CAMERA_ROLL);
+    if (result.status !== 'granted') {
+      Alert.alert(
+        'Insufficient permissions!',
+        'You need to grant camera permissions to use this app.',
+        [{ text: 'Okay' }]
+      );
+      return false;
+    }
+    return true;
+  };
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' ,}}>  
+    <View style={{width:'90%', position:'absolute', top:120, right:16, flexDirection:'row', justifyContent:'space-between', }}>    
+     <Ionicons name="ios-arrow-back" size={24} color={Colors.primary}  onPress={()=>   navigation.navigate("Exercise", {name:name})}/>
+    {image && <AntDesign name="check" size={24} color={Colors.primary} onPress={()=> addInput()} />}    
+    
+    </View>
+
+      <FilledButton title="Pick an image from camera roll" onPress={pickImage} />
+       {image && <Image source={{ uri: image }} style={{ width: 200, height: 300, }} />}
+      <FilledButton
+        title="Take Image"
+        color={Colors.primary} 
+        onPress={takeImageHandler}
+      />
+     </View>
+    
+  );
+}
+
+
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
+  imagePicker: {
+    alignItems: 'center'
   },
-  camera: {
-    flex: 1,
-  },
-  buttonContainer: {
-    flex: 1,
-    backgroundColor: 'transparent',
-    flexDirection: 'row',
-    margin: 20,
-  },
-  flipButton: {
-    flex: 1,
-    height: 40,
-    alignSelf: 'center',
+  imagePreview: {
+    width: '100%',
+    height: 200,
+    marginBottom: 10,
+    justifyContent: 'center',
     alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: 'red',
-    borderRadius: 20,
+    borderColor: '#ccc',
+    borderWidth: 1
   },
-  captureButton: {
-    flex: 1,
-    height: 40,
-    alignSelf: 'center',
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: 'black',
-    borderRadius: 20,
-  },
-  text: {
-    fontSize: 18,
-    color: 'white',
-    justifyContent: 'center',
-  },
+  image: {
+    width: '100%',
+    height: '100%'
+  }
 });
+

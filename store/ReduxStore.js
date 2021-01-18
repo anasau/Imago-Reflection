@@ -11,31 +11,43 @@ const initialState = [
     {
     name:'exercise1',
     input:'Complete exercise',   
+    time:90
      },   {
     name:'exercise2',
     input:'Complete exercise',
+    time:90
+
     },   {
     name:'exercise3',
     input:'Complete exercise',
+    time:90
+
     },   {
     name:'exercise4',
     input:'Complete exercise',
+    time:90
     },    {
     name:'exercise5',
     input:'Complete exercise',
+    time:90
+
     }, {
     name:'exercise6',
     input:'Complete exercise',
+    time:90
     }, 
     {
     name:'exercise7',
     input:'Complete exercise',
+    time:90
     },
     {
       name:'_id', 
       input:''
     }
 ]
+
+
  
 export function reducer(state = initialState, action) {
   switch (action.type) {
@@ -55,7 +67,7 @@ export function reducer(state = initialState, action) {
           } 
         } return exercise 
       })
-
+      /// dispatch to create a brand new reflection by deleting the current store, incl id so we create a new entry instead of updaing 
       default:
         return state;
     }
