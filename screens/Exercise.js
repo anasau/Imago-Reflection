@@ -15,8 +15,7 @@ export default function Exercise ({route}) {
 
   const {name, previousExercise, nextExercise} = route.params
   // functions to save the user input 
-  const [Data, updateData] =useState(store.getState().filter(object => object.name==='_id')[0].input)
-  console.log(Data)
+  const [id, updateId] =useState(store.getState().filter(object => object.name==='_id')[0].input)
   const [message, updateMessage] = useState('')
  
   const completeReflection = () => {
@@ -34,13 +33,14 @@ export default function Exercise ({route}) {
     }
     
       console.log('new el is beig created ')
-      const result= postInput('/reflection',data).then(data => updateData(data))
+      const result= postInput('/reflection',data).then(data => updateMessage(data))
       return result; 
    }  
 
-const updateReflection = (id) => { 
+const updateReflection = () => { 
   const dataStore =store.getState(); 
   const data = {
+    _id:dataStore[7].input, 
     exercise1:dataStore[0].input, 
     exercise2:dataStore[1].input, 
     exercise3:dataStore[2].input,
@@ -51,9 +51,8 @@ const updateReflection = (id) => {
  
   }
 
-  console.log('edit is happening ')
-  const edit = updateInput('/reflection/update', Data._id, data).then(data =>updateMessage('Reflection has been successfully submitted.') )
-
+  console.log('edit is happening with data', data)
+  const edit = updateInput('/reflection', data).then(data =>updateMessage('Reflection has been successfully submitted.') )
   return edit; 
 }
  
@@ -95,8 +94,8 @@ const updateReflection = (id) => {
 
   return (
   <HomeScreenContainer> 
-    <CompletedExercise title ='Complete Reflection' onPress = {() => {Data._id.length>5 ? updateReflection() : completeReflection()}}/> 
-    <Text> {message} </Text>
+    <CompletedExercise title ='Complete Reflection' onPress = {() => {id.length>5 ? updateReflection() : completeReflection()}}/> 
+    <Text style ={{color:'blue', marginVertical:10, }}> {message} </Text>
     <Instruction> {instruction} </Instruction>
       <Image source={require('../assets/reflection.png')} style ={{width:150, height:150 }}/> 
     <View style = {styles.view}> 

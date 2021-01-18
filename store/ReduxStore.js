@@ -3,7 +3,6 @@
 import React from "react";
 import { createStore, applyMiddleware } from "redux";
 import thunk from 'redux-thunk';
-import {getData} from '../store/reducers/serverReducer'
 
 
       
@@ -28,7 +27,7 @@ const initialState = [
     name:'exercise6',
     input:'Complete exercise',
     }, 
-{
+    {
     name:'exercise7',
     input:'Complete exercise',
     },

@@ -20,7 +20,7 @@ app.use('/auth/users', usersRouter);
 
 app.use((req, res, next) => {
   const error = new HttpError('Could not find this route.', 404);
-  throw error;
+  res.send(error);
 });
 
 app.use((error, req, res, next) => {
@@ -35,7 +35,7 @@ app.use((error, req, res, next) => {
 const mongoConnection= 'mongodb+srv://ana_codeworks:1q2w3e4r@cluster0.cqkmv.mongodb.net/test?retryWrites=true&w=majority';
 
 
-mongoose.connect(mongoConnection, {useNewUrlParser:true, useUnifiedTopology:true,   useCreateIndex: true,})
+mongoose.connect(mongoConnection, {useNewUrlParser:true, useUnifiedTopology:true,   useCreateIndex: true, useFindAndModify:false})
   .then((result)=> {
     console.log('connected to db');
     app.listen(PORT,  ()=> { 

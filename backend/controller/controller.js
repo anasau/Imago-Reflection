@@ -29,11 +29,11 @@ exports.getAll = async (req, res) => {
 // }; 
 
 exports.postOne =  async (req, res) => { 
-  const {id, exercise1, exercise2, exercise3, exercise4, exercise5, exercise6,exercise7} = req.body;
+  const {_id, exercise1, exercise2, exercise3, exercise4, exercise5, exercise6,exercise7} = req.body;
   
   try {
     const reflection = await ReflectionDb.create({
-      id:id,
+      _id:_id,
       exercise1:exercise1, 
       exercise2:exercise2, 
       exercise3:exercise3, 
@@ -54,8 +54,7 @@ exports.postOne =  async (req, res) => {
 
 
 exports.update =  async (req, res) => { 
-
-  const { _id,exercise1, exercise2, exercise3, exercise4, exercise5, exercise6,exercise7} = req.body;
+  const {_id, exercise1, exercise2, exercise3, exercise4, exercise5, exercise6,exercise7} = req.body;
   try {
     const response = await ReflectionDb.findByIdAndUpdate({_id:_id}, 
       {exercise1, exercise2, exercise3, exercise4, exercise5, exercise6, exercise7}, {new:true});  

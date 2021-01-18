@@ -38,6 +38,7 @@ export default function InputScren ({route}) {
           text
         }) 
         navigation.navigate("Exercise", {name:lowerCaseName} );
+        
         // potentially pass next excercise so when the page is open - the correct i.e. next exercise is already displayed.
     } 
   };
@@ -47,7 +48,7 @@ export default function InputScren ({route}) {
     <HomeScreenContainer> 
     <Text> {name} </Text>
     <Text> {remainingTime} </Text> 
-    <CompletedExercise title ='Save input' onPress = {() => { addInput()}}/> 
+    <CompletedExercise title ='Save input' onPress = {() => addInput()}/> 
     <TextButton title='close page' style={styles.closeButton} onPress={closePage}></TextButton>
     <TextInput style={styles.textInput}  value={text} onChangeText={e =>setText(e)}/> 
     </HomeScreenContainer>

@@ -10,7 +10,7 @@ router.post('/', ReflectionDb.postOne);
 
 // router.delete('/delete/:id', postsDb.delete);
 
-router.put('/update/:id', ReflectionDb.update)
+router.put('/', ReflectionDb.update);
 
 
 module.exports = router; 

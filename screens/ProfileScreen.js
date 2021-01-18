@@ -38,13 +38,13 @@ export function ProfileScreen ({navigation}) {
           <Text > {item.input} </Text>
           </View>
         )}
-        keyExtractor={exercise => `${exercise.name}`}
+        keyExtractor={item => {Math.random()}}
       /> : 
       <Text> start new Reflection </Text>
 
       }
     
-    {lastReflection.length> 1 ?  Array.from(lastReflection).map((each) => <Text key={each._id}> {each.createdAt} </Text> ) : <Text key='kADCJH'> No previous reflections found </Text> }
+    {lastReflection.length> 1 ?  Array.from(lastReflection).map((each) => <Text key={Math.random()}> {each.createdAt} </Text> ) : <Text key='kADCJH'> No previous reflections found </Text> }
   
       </View>
     {/* <ProgressComponent/>  */}
