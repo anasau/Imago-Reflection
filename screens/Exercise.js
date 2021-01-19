@@ -93,7 +93,7 @@ const updateReflection = () => {
    
   function addInput() {
     updateMessage('')
-    navigation.navigate("Input",  {name:NAME,remainingTime:remainingTime, previousExercise:previousExercise.name, nextExercise:nextExercise.name} );
+    navigation.navigate("Input",  {name:NAME,remainingTime:remainingTime} );
   }
 
   function nextExerciseFunc () { 
@@ -104,7 +104,7 @@ const updateReflection = () => {
   }
   
   function goBackOneStep(){
-    navigation.goBack()
+    navigation.navigate('ReflectionExerciseList', {name:NAME.slice(-1)})
   }
 
   // input for Instruction element 
@@ -113,7 +113,7 @@ const updateReflection = () => {
 
   return (
   <HomeScreenContainer> 
-    <CompletedExercise title ='Complete Reflection' onPress = {() => {id.length>5 ? updateReflection() : completeReflection()}}/> 
+    <CompletedExercise title ='Complete Reflection' onPress = {() => {id.length>5 ? updateReflection() : completeReflection()} }/> 
     <Text style ={{color:'blue', marginVertical:10, }}> {message} </Text> 
     <Instruction> {instruction} </Instruction>
       <Image source={require('../assets/reflection.png')} style ={{width:150, height:150 }}/> 

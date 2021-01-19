@@ -14,11 +14,11 @@ export function DisplayedExercise (props) {
   const navigation = useNavigation();
 
   const {name, title, text, image} = props.exercise;
-  const previousExercise = props.previousExercise;
-  const nextExercise = props.nextExercise;  
+  // const previousExercise = props.previousExercise;
+  // const nextExercise = props.nextExercise;  
   
 function navigateToExercise() {
-    navigation.navigate("Exercise", {name:name, previousExercise:previousExercise, nextExercise:nextExercise});
+    navigation.navigate("Exercise", {name:name });
 }
 
 function goBackOneStep(){

@@ -29,7 +29,7 @@ export default function HomeScreen() {
   const navigation = useNavigation();
 
   function navigateToExerciseList() {
-      navigation.navigate("ExerciseNavigator", {lastexercise:0});
+      navigation.navigate("ReflectionExerciseList", {name:0});
   }
   
   function navigateToProfile() {
