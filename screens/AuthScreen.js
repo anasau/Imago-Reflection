@@ -20,7 +20,7 @@ export function AuthScreen({navigation}) {
   return (
       <AuthContainer>
         <View style = {styles.welcome}> 
-        <Heading style={styles.title}>Welcome to Imago </Heading>
+        <Heading style={styles.title}> Welcome to Imago </Heading>
         </View> 
       <Error error={error} />
       <Input

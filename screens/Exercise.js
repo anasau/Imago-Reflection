@@ -33,7 +33,7 @@ export default function Exercise ({route}) {
       exercise7:dataStore[6].input, 
     }
       updateMessage('')
-      console.log('new el is beig created ')
+      console.log('new reflection is being created ')
       const result= postInput('/reflection',data).then(data => updateMessage(data))
       return result; 
    }  

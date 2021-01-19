@@ -12,6 +12,7 @@ import {IconButton} from '../components/IconButton'
 import { AntDesign } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
 import { MaterialIcons } from '@expo/vector-icons';
+import {AuthContext} from '../context/AuthContext';
 
 export default function ProfileScreen () {
   const navigation = useNavigation();
@@ -19,6 +20,10 @@ export default function ProfileScreen () {
   const [FLisVisible, updateFLisVisible] =useState(false);
   const dispatch = useDispatch();
 
+  
+  const [loading, setLoading] = React.useState(false);
+  const [error, setError] = React.useState('');
+  const {logout} = React.useContext(AuthContext);
 
   const [modalVisible, setModalVisible] = useState(false);
   const dataStore =store.getState().slice(0,7); 
@@ -46,6 +51,7 @@ export default function ProfileScreen () {
         setLoading(true);
         await logout()
       } catch (e) {
+        console.log(e)
         setError(e)
         setLoading(false);
       }
@@ -71,21 +77,21 @@ export default function ProfileScreen () {
             <ScrollView key={item.name+2}> 
             {
               item.input.slice(0,4)==='file' ? 
-            <View key={index}> 
+            <View key={index} style={{borderRadius:6}}> 
               <Image 
                 source={{ uri: item.input }} 
-                style={{height:100}} />
+                style={{height:100, borderRadius:6}} />
+                
               <Feather name="zoom-in" size={24} 
                 color={Colors.lightGreen} 
                 style={{position:'absolute', top:10, right:5}} 
                 onPress={()=> {
-                  updateFLisVisible(false),
                   navigation.navigate('Picture',  {input:item.input})
                 }}/>
               </View>
               :              
               <View key={item.name} style={{ borderRadius:6, backgroundColor:'#ddd',  margin:5, padding:3, flexDirection:'row'}}> 
-                  <Text style={{marginVertical:10, color: item.input.slice(0,10) === 'Reflection' ? 'purple' : Colors.primary }} onPress={()=> navigation.navigate('View',  {input:item.input})}> {(index+1) + ': ' +item.input.slice(0,35) + '...'}  </Text>
+                  <Text style={{marginVertical:10, color: item.input.slice(0,11).trim() === 'Reflection' ? 'purple' : Colors.primary }} onPress={()=> navigation.navigate('View',  {input:item.input})}> {(index+1) + ': ' +item.input.slice(0,35) + '...'}  </Text>
                 
                   <AntDesign name="edit" size={15} color={Colors.brightorange} style={{ width:'10%', marginVertical:10,marginHorizontal:10}}  onPress={()=> {
                       navigation.navigate('Exercise', {name:'Exercise '+ (+item.name.slice(-1))} ), 

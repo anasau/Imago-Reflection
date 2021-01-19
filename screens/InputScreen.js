@@ -14,7 +14,7 @@ export default function InputScren ({route}) {
   const navigation = useNavigation();
   const {name, remainingTime} = route.params
   const [nextExercise, updateNextExercise] =useState(+name.slice(-1)+1)
-  
+
   let lowerCaseName=name.replace(/\s/g, '').toLowerCase(); 
   const dispatch = useDispatch();
 
@@ -45,11 +45,11 @@ export default function InputScren ({route}) {
 
   return (
     <HomeScreenContainer> 
-    <Text> {name} </Text>
+    <Text style={{fontWeight:'bold', marginVertical:10, padding:2}}> {name} </Text>
     {/* <Text> {remainingTime} </Text>  */}
     <CompletedExercise title ='Save input' onPress = {() => addInput()}/> 
     <TextButton title='close page' style={styles.closeButton} onPress={closePage}></TextButton>
-    <TextInput style={styles.textInput} multiline editable value={text.slice(0,4) ==='file' ? alert('Image is saved for this exercise. To replace it, save the new input.') : text} onChangeText={e =>setText(e)}/> 
+    <TextInput style={styles.textInput} multiline editable value={text.slice(0,4) ==='file' ? alert('Image is saved for this exercise. To replace it, save the new input.') : (text.slice(0,11).trim() === 'Reflection' ? '' : text)} onChangeText={e =>setText(e)}/> 
     </HomeScreenContainer>
 
   )
