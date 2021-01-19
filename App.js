@@ -7,7 +7,7 @@ import {MainNavigator} from './navigation/MainNavigator';
 import {authReducer} from './store/reducers/authReducer';
 import {UserContext} from './context/UserContext';
 import {SplashScreen} from './screens/SplashScreen';
-import {StatusBar, StyleSheet} from 'react-native';
+import {StatusBar, StyleSheet, LogBox} from 'react-native';
 import {TabNavigator } from './navigation/TabNavigator'
 import { Provider } from 'react-redux';
 import { createStore } from "redux";
@@ -18,9 +18,8 @@ import {store} from './store/ReduxStore'
 
 const RootStack = createStackNavigator();
 
-
+LogBox.ignoreAllLogs(true);
 export default function() {
-
   
 // store.subscribe(() => {
 //   console.log("new state", store.getState());

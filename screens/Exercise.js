@@ -10,8 +10,7 @@ import {CountDown} from '../components/countdown'
 import {store} from '../store/ReduxStore'
 import {postInput, updateInput} from '../store/reducers/serverReducer';
 import exercises from '../store/exercises'
-import { update } from '../backend/models/model';
-
+import {TextButton} from '../components/TextButton'
 export default function Exercise ({route}) {
 
 
@@ -66,7 +65,7 @@ const updateReflection = () => {
   function count ()  {
   
       updateCounterOn(true)
-      setInterval( () => updateRemainingTime(remaining => remaining -1), 1000)
+      setInterval( () => updateRemainingTime(remaining => remaining -1), 1000*60)
     
   }
 
@@ -103,9 +102,14 @@ const updateReflection = () => {
       UDPATENAME(NAME=> NAME.slice(0,-1)+Number(+NAME.slice(-1)+1))
     }
   }
+  
+  function goBackOneStep(){
+    navigation.goBack()
+  }
 
   // input for Instruction element 
   const instruction ='Before starting this exercise, set a timer. Check tips throughout the exercise or get in touch with the couch for guidance. Enjoy! '
+  
 
   return (
   <HomeScreenContainer> 
@@ -123,6 +127,8 @@ const updateReflection = () => {
     <Text style = {styles.title} > {NAME} </Text>
       <FilledButton title='Add Insight' style={styles.inputButton} onPress={() => addInput()}> </FilledButton>
       <FilledButton title='Add Picture' style={styles.inputButton} onPress={() => openCamera()}> </FilledButton>
+      <TextButton title='go back' onPress={() => goBackOneStep()}  style ={{fontSize:12, color:'black'}}/> 
+
   </HomeScreenContainer>
 
   )

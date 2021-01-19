@@ -39,7 +39,7 @@ function goBackOneStep(){
       <Text style = { styles.exercise}>  {text} </Text>
       </View>
      <StartExerciseButton title='Start reflecting' onPress={() => navigateToExercise()}/> 
-     <TextButton title='back to Homepage' onPress={() => goBackOneStep()}  style ={{fontSize:12, color:'black'}}/> 
+     <TextButton title='go back' onPress={() => goBackOneStep()}  style ={{fontSize:12, color:'black'}}/> 
     </HomeScreenContainer>
 )
 

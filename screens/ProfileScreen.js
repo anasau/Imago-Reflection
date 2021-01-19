@@ -1,25 +1,27 @@
 import React, {useState, useEffect} from 'react';
 import { HomeScreenContainer } from '../components/HomeScreenContainer';
-import {StyleSheet, Text,   Modal,  View, FlatList, Image, Pressable} from 'react-native';
+import {StyleSheet, Text,   ScrollView,  View, FlatList, Image, Pressable} from 'react-native';
 import {store} from '../store/ReduxStore'
 import {getData, postInput} from '../store/reducers/serverReducer';
 import { Feather } from '@expo/vector-icons';
 import {TextButton} from '../components/TextButton';
 import Colors from '../constants/Colors';
-import ProgressComponent from '../components/ProgressComponent';
 import {useDispatch, useSelector} from "react-redux";
 import { useNavigation } from '@react-navigation/native';
 import {IconButton} from '../components/IconButton'
+import { AntDesign } from '@expo/vector-icons';
+import { Ionicons } from '@expo/vector-icons';
+import { MaterialIcons } from '@expo/vector-icons';
 
-
-export default function ProfileScreen ({}) {
+export default function ProfileScreen () {
   const navigation = useNavigation();
-
   const [lastReflection, updateLastReflection] =useState('no previous reflection found');
   const [FLisVisible, updateFLisVisible] =useState(false);
   const dispatch = useDispatch();
 
+
   const [modalVisible, setModalVisible] = useState(false);
+  const dataStore =store.getState().slice(0,7); 
 
   useEffect(() => {
       const input = getData('/reflection')
@@ -28,14 +30,9 @@ export default function ProfileScreen ({}) {
           payload:data[data.length-1]})
          })
      },[]) 
-      
-     const dataStore =store.getState().slice(0,7); 
-
-      function view () {
-        navigation.navigate("View" );
-      }
-      
-
+     
+    
+    
 
     return (
     <HomeScreenContainer 
@@ -57,52 +54,62 @@ export default function ProfileScreen ({}) {
     <Image 
       source={require('../assets/future2.png')} 
       style={{height:100, margin:0, paddingTop:0}}/> 
-    <View 
-      style={{justifyContent:'flex-start', alignContent:'flex-start' }}> 
-    <TextButton title='View latest reflection' style={{color:Colors.primary, alignSelf:"flex-start", margin:10}} 
+    <TextButton title='View latest reflection' style={{color:Colors.primary, alignSelf:"flex-start", marginHorizontal:8}} 
       textStyle={{alignItems:'flex-start'}}
         onPress={()=> FLisVisible 
     ?     
         updateFLisVisible(false) 
     :  
         updateFLisVisible(true)}
-        />
+        /> 
         { FLisVisible ? 
-         <FlatList
+         <FlatList 
+          style={{width:'100%'}}
           contentContainerStyle={styles.Container}
           data={dataStore} 
-          renderItem={({ item }) => (
-            <View key={item.name+2}> 
+          renderItem={({ item, index}) => (
+            <ScrollView key={item.name+2}> 
             {
               item.input.slice(0,4)==='file' ? 
-            <View key={item.name+3}> 
+            <View key={index}> 
               <Image 
                 source={{ uri: item.input }} 
-                style={{height:100}} key={item.name}/>
+                style={{height:100}} />
               <Feather name="zoom-in" size={24} 
                 color={Colors.lightGreen} 
-                style={{position:'absolute', top:10, right:5, }} 
-                key = {item.name+1} 
-                onPress={()=>view()} />
+                style={{position:'absolute', top:10, right:5}} 
+                onPress={()=> {
+                  updateFLisVisible(false),
+                  navigation.navigate('Picture',  {input:item.input})
+                }}/>
               </View>
-              : 
-              <View> 
-              <Text style={{marginVertical:10., color:Colors.primary}} 
-                key={item.name}> {item.input} </Text>
+              :              
+              <View key={item.name} style={{ borderRadius:6, backgroundColor:'#ddd',  margin:5, padding:3, flexDirection:'row'}}> 
+                  <Text style={{marginVertical:10, color: item.input.slice(0,10) === 'Reflection' ? 'purple' : Colors.primary }} onPress={()=> navigation.navigate('View',  {input:item.input})}> {(index+1) + ': ' +item.input.slice(0,35) + '...'}  </Text>
+                
+                  <AntDesign name="edit" size={15} color={Colors.brightorange} style={{ width:'10%', marginVertical:10,marginHorizontal:10}}  onPress={()=> {
+                      navigation.navigate('Exercise', {name:'Exercise '+ (+item.name.slice(-1))} ), 
+                      updateFLisVisible(false)
+                  }} />
               </View>
             }
-          </View>
+          </ScrollView>
           
-        )}
-      /> : 
-      <Text> </Text>
+        ) 
       }
-        
-        {lastReflection.length> 1 ?  Array.from(lastReflection)
-        .map((each) => <Text key={each.createdAt}> {each.createdAt} </Text> ) 
-        : 
-        <Text key='kADCJH'> No previous reflections found </Text> }
-    </View>
+      keyExtractor={(item, index) => index.toString()}
+
+      /> : 
+      <AntDesign name="down" size={24} color={Colors.brightPink }onPress={()=> FLisVisible 
+        ?     
+            updateFLisVisible(false) 
+        :  
+            updateFLisVisible(true)}/>    
+            
+     }
+{/*         
+        {(lastReflection.length> 1 && !FLisVisible) &&  Array.from(lastReflection)
+        .map((each) => <Text key={Math.random()}> {each.createAt} </Text> )} */}
     </HomeScreenContainer>
 
   );
@@ -119,3 +126,4 @@ const styles = StyleSheet.create({
     right: 16,
   },
 });
+

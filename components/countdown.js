@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react'
 import {Text, View, StyleSheet, ImageComponent } from 'react-native'
 import { Ionicons } from '@expo/vector-icons';
 
+
 export function CountDown (props) { 
   
 const remainingTime =props.remainingTime
@@ -9,7 +10,7 @@ const remainingTime =props.remainingTime
   return(
 
     <View> 
-      <Text style={styles.text}> {props.remainingTime }  </Text>
+      <Text style={styles.text}> {props.remainingTime }' </Text>
       <View  style={{flexDirection:'row'}}> 
         <Ionicons name="ios-play-back-circle-outline" size={24} color="black" />
           {props.counterOn ? 

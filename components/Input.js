@@ -5,7 +5,6 @@ export function Input({style, ...props}) {
   return (
     <TextInput
       {...props}
-      multiline
       style={[styles.input, style]}
       placeholderTextColor={'darkgray'}
     />
