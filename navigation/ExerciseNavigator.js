@@ -9,7 +9,7 @@ import CameraScreen from '../screens/CameraScreen'
 
 const ExerciseStack = createStackNavigator();
 
-export function ExerciseNavigator() {
+export default function ExerciseNavigator() {
 
   return (
     // <NavigationContainer> 

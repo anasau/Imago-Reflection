@@ -88,7 +88,7 @@ const updateReflection = () => {
   //Add insight and add picture buttons functions - add picture is wip 
   function openCamera() {
       updateMessage('')
-      navigation.navigate("Camera", {name, NAME});
+      navigation.navigate("Camera", {name: NAME});
   }
   
    

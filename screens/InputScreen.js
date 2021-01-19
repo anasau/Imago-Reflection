@@ -48,7 +48,7 @@ export default function InputScren ({route}) {
     <Text> {remainingTime} </Text> 
     <CompletedExercise title ='Save input' onPress = {() => addInput()}/> 
     <TextButton title='close page' style={styles.closeButton} onPress={closePage}></TextButton>
-    <TextInput style={styles.textInput}  value={text} onChangeText={e =>setText(e)}/> 
+    <TextInput style={styles.textInput} multiline editable value={text.slice(0,4) ==='file' ? alert('Image is saved for this exercise. To replace it, save the new input.') : text} onChangeText={e =>setText(e)}/> 
     </HomeScreenContainer>
 
   )

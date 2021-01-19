@@ -10,35 +10,35 @@ import thunk from 'redux-thunk';
 const initialState = [
     {
     name:'exercise1',
-    input:'Complete exercise',   
+    input:'Reflection pending',
     time:90
      },   {
     name:'exercise2',
-    input:'Complete exercise',
+    input:'Reflection pending',
     time:90
 
     },   {
     name:'exercise3',
-    input:'Complete exercise',
+    input:'Reflection pending',
     time:90
 
     },   {
     name:'exercise4',
-    input:'Complete exercise',
+    input:'Reflection pending',
     time:90
     },    {
     name:'exercise5',
-    input:'Complete exercise',
+    input:'Reflection pending',
     time:90
 
     }, {
     name:'exercise6',
-    input:'Complete exercise',
+    input:'Reflection pending',
     time:90
     }, 
     {
     name:'exercise7',
-    input:'Complete exercise',
+    input:'Reflection pending',
     time:90
     },
     {

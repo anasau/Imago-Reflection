@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react'
-import {Text, View, StyleSheet } from 'react-native'
+import {Text, View, StyleSheet, ImageComponent } from 'react-native'
 import { Ionicons } from '@expo/vector-icons';
 
 export function CountDown (props) { 
