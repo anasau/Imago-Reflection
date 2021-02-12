@@ -1,7 +1,7 @@
-import React from 'react';
-import {View, StyleSheet, Text} from 'react-native';
+import React from "react";
+import { View, StyleSheet, Text } from "react-native";
 
-export function Error({error}) {
+export function Error({ error }) {
   return (
     <View style={styles.container}>
       <Text style={styles.text}>{error}</Text>
@@ -14,7 +14,7 @@ const styles = StyleSheet.create({
     paddingVertical: 8,
   },
   text: {
-    color: 'red',
-    fontWeight: 'bold',
+    color: "red",
+    fontWeight: "bold",
   },
 });

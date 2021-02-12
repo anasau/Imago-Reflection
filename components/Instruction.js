@@ -1,12 +1,10 @@
-import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import React from "react";
+import { StyleSheet, Text, View } from "react-native";
 
-export function Instruction({children}) {
+export function Instruction({ children }) {
   return (
-    <View style ={{width:'90%'}}> 
-    <Text style={styles.text}>
-      {children}
-    </Text>
+    <View style={{ width: "90%" }}>
+      <Text style={styles.text}>{children}</Text>
     </View>
   );
 }
@@ -14,7 +12,7 @@ export function Instruction({children}) {
 const styles = StyleSheet.create({
   text: {
     fontSize: 14,
-    textAlign:'center', 
-    marginBottom:10, 
+    textAlign: "center",
+    marginBottom: 10,
   },
 });

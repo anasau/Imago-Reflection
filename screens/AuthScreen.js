@@ -1,47 +1,46 @@
-import React from 'react';
-import {View, StyleSheet} from 'react-native';
-import {Heading} from '../components/Heading';
-import {Input} from '../components/Input';
-import {FilledButton} from '../components/FilledButton';
-import {TextButton} from '../components/TextButton';
-import {Error} from '../components/Error';
-import {AuthContainer} from '../components/AuthContainer';
-import {AuthContext} from '../context/AuthContext';
-import {Loading} from '../components/Loading';
-import Colors from '../constants/Colors';
+import React from "react";
+import { View, StyleSheet } from "react-native";
+import { Heading } from "../components/Heading";
+import { Input } from "../components/Input";
+import { FilledButton } from "../components/FilledButton";
+import { TextButton } from "../components/TextButton";
+import { Error } from "../components/Error";
+import { AuthContainer } from "../components/AuthContainer";
+import { AuthContext } from "../context/AuthContext";
+import { Loading } from "../components/Loading";
+import Colors from "../constants/Colors";
 
-export function AuthScreen({navigation}) {
-  const {login} = React.useContext(AuthContext);
-  const [email, setEmail] = React.useState('anasau@gmail.com');
-  const [password, setPassword] = React.useState('1q2w3e');
+export function AuthScreen({ navigation }) {
+  const { login } = React.useContext(AuthContext);
+  const [email, setEmail] = React.useState("anasau@gmail.com");
+  const [password, setPassword] = React.useState("1q2w3e");
   const [loading, setLoading] = React.useState(false);
-  const [error, setError] = React.useState('');
+  const [error, setError] = React.useState("");
 
   return (
-      <AuthContainer>
-        <View style = {styles.welcome}> 
+    <AuthContainer>
+      <View style={styles.welcome}>
         <Heading style={styles.title}> Welcome to Imago </Heading>
-        </View> 
+      </View>
       <Error error={error} />
       <Input
         style={styles.input}
-        placeholder={'Email'}
-        keyboardType={'email-address'}
+        placeholder={"Email"}
+        keyboardType={"email-address"}
         value={email}
         onChangeText={setEmail}
       />
       <Input
         style={styles.input}
-        placeholder={'Password'}
+        placeholder={"Password"}
         secureTextEntry={true}
         value={password}
         onChangeText={setPassword}
       />
       <FilledButton
-        title={'Login'}
+        title={"Login"}
         style={styles.loginButton}
-        onPress={
-          async () => {
+        onPress={async () => {
           try {
             setLoading(true);
             await login(email, password);
@@ -49,14 +48,13 @@ export function AuthScreen({navigation}) {
             setError(e.message);
             setLoading(false);
           }
-        }
-      }
+        }}
       />
       <TextButton
-        title={'Haven\'t got an? Create one'  }
-        style = {styles.textButton}
+        title={"Haven't got an? Create one"}
+        style={styles.textButton}
         onPress={() => {
-          navigation.navigate('Registration')
+          navigation.navigate("Registration");
         }}
       />
       <Loading loading={loading} />
@@ -73,13 +71,13 @@ const styles = StyleSheet.create({
   },
   loginButton: {
     marginVertical: 32,
-    backgroundColor:Colors.accent, 
+    backgroundColor: Colors.accent,
     // color:Colors.primary
   },
-  welcome: { 
-    flexDirection: 'row'
-  }, 
-  textButton: { 
-    color:'black'
-  }, 
+  welcome: {
+    flexDirection: "row",
+  },
+  textButton: {
+    color: "black",
+  },
 });

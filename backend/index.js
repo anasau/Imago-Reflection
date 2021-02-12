@@ -12,7 +12,6 @@ const HttpError = require('./models/http-error');
 
 // env doesnt work - need to raise a hr to sort it out 
 const PORT =process.env.PORT  ;  
-console.log(PORT)
 
 app.use(cors()); 
 

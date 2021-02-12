@@ -1,8 +1,8 @@
-import React from 'react';
-import {View, StyleSheet} from 'react-native';
+import React from "react";
+import { View, StyleSheet } from "react-native";
 
-export function HomeScreenContainer ({children}) {
-  return <View style={styles.container}>{children}</View>
+export function HomeScreenContainer({ children }) {
+  return <View style={styles.container}>{children}</View>;
 }
 
 const styles = StyleSheet.create({
@@ -10,7 +10,7 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 16,
     paddingTop: 120,
-    alignItems: 'center',
-    backgroundColor:'white', 
+    alignItems: "center",
+    backgroundColor: "white",
   },
 });

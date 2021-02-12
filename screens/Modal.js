@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { useNavigation } from '@react-navigation/native';
-import {HomeScreenContainer} from '../components/HomeScreenContainer'
+import { useNavigation } from "@react-navigation/native";
+import { HomeScreenContainer } from "../components/HomeScreenContainer";
 import {
   Alert,
   Image,
@@ -8,20 +8,17 @@ import {
   StyleSheet,
   Text,
   TouchableHighlight,
-  View
+  View,
 } from "react-native";
-import Colors from '../constants/Colors'
+import Colors from "../constants/Colors";
 
-export default function ModalScreen ({route}) { 
+export default function ModalScreen({ route }) {
   const navigation = useNavigation();
-  const {input} =route.params;
-
+  const { input } = route.params;
 
   const [modalVisible, setModalVisible] = useState(true);
-  
-  return (
-  
 
+  return (
     <View style={styles.centeredView}>
       <Modal
         animationType="slide"
@@ -34,30 +31,32 @@ export default function ModalScreen ({route}) {
       >
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
-              <Text  multiline style={styles.modalText}> {input} </Text>
+            <Text multiline style={styles.modalText}>
+              {" "}
+              {input}{" "}
+            </Text>
             <TouchableHighlight
-              style={{ ...styles.openButton, backgroundColor: Colors.accent}}
+              style={{ ...styles.openButton, backgroundColor: Colors.accent }}
               onPress={() => {
-              navigation.goBack()
-                }}
+                navigation.goBack();
+              }}
             >
               <Text style={styles.textStyle}>Close view</Text>
             </TouchableHighlight>
           </View>
         </View>
       </Modal>
-
     </View>
   );
-};
+}
 
 const styles = StyleSheet.create({
   centeredView: {
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    marginTop: 22, 
-    flex:1
+    marginTop: 22,
+    flex: 1,
   },
   modalView: {
     margin: 20,
@@ -68,28 +67,27 @@ const styles = StyleSheet.create({
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
-      height: 2
+      height: 2,
     },
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
-    elevation: 5, 
-    minHeight:600,     
-   width:'90%'
+    elevation: 5,
+    minHeight: 600,
+    width: "90%",
   },
   openButton: {
-    backgroundColor:Colors.primary,
+    backgroundColor: Colors.primary,
     borderRadius: 20,
     padding: 10,
     elevation: 2,
   },
   textStyle: {
-    color: 'white',
+    color: "white",
     fontWeight: "bold",
-    textAlign: "center"
+    textAlign: "center",
   },
   modalText: {
     marginBottom: 15,
-    textAlign: "center"
-  }
+    textAlign: "center",
+  },
 });
-
