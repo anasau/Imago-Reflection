@@ -27,14 +27,14 @@ npm start
 - Express -  Back end server framework for Node.js 
 - Mongoose - ODM library for the non-relational database MongoDB. 
 
-#Contributing
+# Contributing
 Improvements are welcome :)
 
 Fork the repo and do your thing. Push to your fork and submit a pull request.
 
-Author
+# Author
 Made with love by Ana Sau in 7 days 
 -Github - LinkedIn
 
-License
+# License
 This project is licensed under the MIT License.
