@@ -33,7 +33,7 @@ Improvements are welcome :)
 Fork the repo and do your thing. Push to your fork and submit a pull request.
 
 # Author
-Made with love by Ana Sau in 7 days 
+Built with  ♥ by Ana Sau in 7 days 
 -Github - LinkedIn
 
 # License
