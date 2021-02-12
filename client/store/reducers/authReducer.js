@@ -1,4 +1,3 @@
-require('dotenv').config()
 import React from "react";
 import axios from "axios";
 import * as SecureStore from "expo-secure-store";

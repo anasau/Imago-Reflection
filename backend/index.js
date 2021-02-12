@@ -1,5 +1,4 @@
 
-require('dotenv').config()
 const express = require('express');
 const app = express (); 
 const mainRouter = require('./routers/router'); 
@@ -11,7 +10,7 @@ const HttpError = require('./models/http-error');
 
 
 // env doesnt work - need to raise a hr to sort it out 
-const PORT =process.env.PORT  ;  
+const PORT =3002;  
 
 app.use(cors()); 
 

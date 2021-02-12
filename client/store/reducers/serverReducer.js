@@ -1,4 +1,3 @@
-// require('dotenv').config({path: __dirname + '../../'})
 import React from "react";
 import axios from "axios";
 
