@@ -3,11 +3,11 @@ Imago Reflection helps you do a deep introspection of the past year by providing
 
 #Screenshots 
 
-<code><img height="540" alt="Home Screen" src="https://github.com/anasau/Imago-Reflection/blob/default/assets/homescreen.jpg"></code>
-<code><img height="540" alt="Exercise 2 " src="https://github.com/anasau/Imago-Reflection/blob/default/assets/pickexercise.jpg"></code>
+<code><img height="550" alt="Home Screen" src="https://github.com/anasau/Imago-Reflection/blob/default/assets/homescreen.jpg"></code>
+<code><img height="500" alt="Exercise 2 " src="https://github.com/anasau/Imago-Reflection/blob/default/assets/pickexercise.jpg"></code>
 
 <!-- <code><img height="540" alt="Profile" src="https://github.com/anasau/Imago-Reflection/blob/default/assets/reflectionstatus.jpg"></code> -->
-<code><img height="540" alt="Reflection Page" src="https://github.com/anasau/Imago-Reflection/blob/default/assets/exercisepage.jpg"></code>
+<code><img height="500" alt="Reflection Page" src="https://github.com/anasau/Imago-Reflection/blob/default/assets/exercisepage.jpg"></code>
 
 
 
