@@ -7,13 +7,14 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const HttpError = require('./models/http-error');
+require('dotenv').config()
 
 
-// env doesnt work - need to raise a hr to sort it out 
-const PORT =3002;  
+const PORT = process.env.PORT;  
+const username =process.env.DB_USERNAME
+const password =process.env.DB_PASSWORD
 
 app.use(cors()); 
-
 app.use(bodyParser.json());
 
 app.use('/reflection', mainRouter);
@@ -33,9 +34,8 @@ app.use((error, req, res, next) => {
   res.json({ message: error.message || 'An unknown error occurred!' });
 });
 
-// connecting to the mongodb db with mongoose 
-const mongoConnection= 'mongodb+srv://ana_codeworks:1q2w3e4r@cluster0.cqkmv.mongodb.net/test?retryWrites=true&w=majority';
 
+const mongoConnection= `mongodb+srv://${username}:${password}@cluster0.cqkmv.mongodb.net/test?retryWrites=true&w=majority`;
 
 mongoose.connect(mongoConnection, {useNewUrlParser:true, useUnifiedTopology:true,   useCreateIndex: true, useFindAndModify:false})
   .then((result)=> {

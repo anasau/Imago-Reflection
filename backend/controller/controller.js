@@ -15,19 +15,6 @@ exports.getAll = async (req, res) => {
 };
 
 
-// exports.delete =  async (req, res ) =>  { 
-//   const {id}= req.params;
-//   try { 
-
-//     const post = await ReflectionDb.deleteOne({_id:id});
-//     res.send (post); 
-//     res.status =(204);  
-//   } catch (e) {
-//     res.send (e) ; 
-//     res.status(500); 
-//   }
-// }; 
-
 exports.postOne =  async (req, res) => { 
   const {_id, exercise1, exercise2, exercise3, exercise4, exercise5, exercise6,exercise7} = req.body;
   
@@ -65,4 +52,20 @@ exports.update =  async (req, res) => {
     res.send(e); 
   }
 };
+
+
+
+//to do
+// exports.delete =  async (req, res ) =>  { 
+//   const {id}= req.params;
+//   try { 
+
+//     const post = await ReflectionDb.deleteOne({_id:id});
+//     res.send (post); 
+//     res.status =(204);  
+//   } catch (e) {
+//     res.send (e) ; 
+//     res.status(500); 
+//   }
+// }; 
 

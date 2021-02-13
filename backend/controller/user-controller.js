@@ -1,7 +1,6 @@
 const { validationResult } = require('express-validator');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-
 const HttpError = require('../models/http-error');
 const User = require('../models/user-model');
 
@@ -22,8 +21,7 @@ const getUsers = async (req, res, next) => {
 };
 
 const signup = async (req, res, next) => {
-
-  //???what rules are there embadded into validatioon Result?
+ // to do 
   // const errors = validationResult(req);
   // console.log(errors, 'errors')
 
@@ -69,13 +67,11 @@ const signup = async (req, res, next) => {
 
   const createdUser = new User({
     email,
-    // image: req.file.path,
     password: hashedPassword,
     // places: []
   });
 
   try {
-    // AWAIT SAVE - MAKES MONGOOSE INSERT THE NEWLY CREATED DOCUMENT INTO THE COLLECTION
     await createdUser.save();
   } catch (err) {
     const error = new HttpError(
@@ -88,11 +84,11 @@ const signup = async (req, res, next) => {
 
   // generating the token 
   let token;
+  const secret = process.env.SECRET
   try {
     token = jwt.sign(
-      // we chose what we want to encode into the token 
       { userId: createdUser.id, email: createdUser.email },
-      'supersecret_dont_share', // any string you want // tis is a private key which no one should know
+      secret,
       { expiresIn: '1h' } 
     );
   } catch (err) {
@@ -102,7 +98,6 @@ const signup = async (req, res, next) => {
     );
     return next(error);
   }
-// send back 
   res
     .status(201)
     .json({ userId: createdUser.id, email: createdUser.email, token: token });
@@ -155,7 +150,7 @@ const login = async (req, res, next) => {
   try {
     token = jwt.sign(
       { userId: existingUser.id, email: existingUser.email },
-      'supersecret_dont_share',
+      SECRET,
       { expiresIn: '3h' }
     );
   } catch (err) {
