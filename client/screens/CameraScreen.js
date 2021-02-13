@@ -10,7 +10,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import { useDispatch } from "react-redux";
 
-import { store } from "../store/ReduxStore";
+import { store } from "../store/reducers/storeReducer";
 
 export default function CameraScreen({ route }) {
   const { name } = route.params;

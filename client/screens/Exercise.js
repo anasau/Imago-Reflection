@@ -7,15 +7,16 @@ import Colors from "../constants/Colors";
 import { CompletedExercise } from "../components/CompletedExercise";
 import { useNavigation } from "@react-navigation/native";
 import { CountDown } from "../components/countdown";
-import { store } from "../store/ReduxStore";
-import { postInput, updateInput } from "../store/reducers/serverReducer";
-import exercises from "../store/exercises";
+import { store } from "../store/reducers/storeReducer";
+import { postInput, updateInput } from "../Server/server";
 import { TextButton } from "../components/TextButton";
+import { UserContext} from '../context/UserContext'
 
 export default function Exercise({ route }) {
+  const {token} = React.useContext(UserContext);
+
   const { name } = route.params;
   const [NAME, UDPATENAME] = useState(name);
-  // functions to save the user input
   const [id, updateId] = useState(
     store.getState().filter((object) => object.name === "_id")[0].input
   );
@@ -34,7 +35,7 @@ export default function Exercise({ route }) {
     };
     updateMessage("");
     console.log("new reflection is being created ");
-    const result = postInput("/reflection", data).then((data) =>
+    const result = postInput("/reflection", data, token).then((data) =>
       updateMessage(data)
     );
     return result;
@@ -54,7 +55,7 @@ export default function Exercise({ route }) {
     };
     updateMessage("");
     console.log("edit is happening with data", data);
-    const edit = updateInput("/reflection", data).then((data) =>
+    const edit = updateInput("/reflection", data, token).then((data) =>
       updateMessage("Reflection has been successfully submitted.")
     );
     return edit;

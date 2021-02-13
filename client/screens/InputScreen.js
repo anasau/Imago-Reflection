@@ -1,34 +1,30 @@
 import React, { useState } from "react";
-import { View, Text, StyleSheet, TextInput } from "react-native";
+import { Text, StyleSheet, TextInput } from "react-native";
 import { TextButton } from "../components/TextButton";
 import Colors from "../constants/Colors";
 import { HomeScreenContainer } from "../components/HomeScreenContainer";
 import { CompletedExercise } from "../components/CompletedExercise";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector} from "react-redux";
 import { useNavigation } from "@react-navigation/native";
-import { store } from "../store/ReduxStore";
-import { getData, postInput } from "../store/reducers/serverReducer";
-import Exercise from "./Exercise";
+
 
 export default function InputScren({ route }) {
   const navigation = useNavigation();
   const { name, remainingTime } = route.params;
   const [nextExercise, updateNextExercise] = useState(+name.slice(-1) + 1);
-
-  let lowerCaseName = name.replace(/\s/g, "").toLowerCase();
   const dispatch = useDispatch();
 
-  let storey = store.getState();
-  const textinput = storey.filter(
-    (exercise) => exercise.name === lowerCaseName
-  )[0].input;
+
+  let lowerCaseName = name.replace(/\s/g, "").toLowerCase();
+
+  let exercises = useSelector(state => state)
+  let textinput = exercises.filter(
+    (exercise) => exercise.name === lowerCaseName)[0].input;
+   
   const [text, setText] = React.useState(textinput);
+  
+  
 
-  const closePage = () => {
-    navigation.navigate("Exercise", { name: name });
-  };
-
-  // save user input if it's not empty
   function addInput() {
     if (text.length > 1) {
       dispatch({
@@ -36,20 +32,21 @@ export default function InputScren({ route }) {
         name: lowerCaseName,
         text,
       });
-      console.log(text, lowerCaseName);
       navigation.navigate("Exercise", { name: "Exercise " + nextExercise });
 
-      // potentially pass next excercise so when the page is open - the correct i.e. next exercise is already displayed.
     }
   }
 
+  const closePage = () => {
+    navigation.navigate("Exercise", { name: name });
+  };
+
   return (
     <HomeScreenContainer>
-      <Text style={{ fontWeight: "bold", marginVertical: 10, padding: 2 }}>
-        {" "}
-        {name}{" "}
+      <Text style={text}>
+        {" "}{name}{" "}
       </Text>
-      {/* <Text> {remainingTime} </Text>  */}
+      <Text> {remainingTime} </Text> 
       <CompletedExercise title="Save input" onPress={() => addInput()} />
       <TextButton
         title="close page"
@@ -86,4 +83,9 @@ const styles = StyleSheet.create({
     marginVertical: 0,
     padding: 10,
   },
+  text: { 
+    fontWeight: "bold",
+    marginVertical: 10,
+    padding: 2 
+  }
 });

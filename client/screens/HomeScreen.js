@@ -12,7 +12,7 @@ import { Loading } from "../components/Loading";
 import Colors from "../constants/Colors";
 import { useNavigation } from "@react-navigation/native";
 import { TextButton } from "../components/TextButton";
-import { store } from "../store/ReduxStore";
+import { store } from "../store/reducers/storeReducer";
 
 export default function HomeScreen() {
   const [loading, setLoading] = React.useState(false);

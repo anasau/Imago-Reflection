@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { HomeScreenContainer } from "../components/HomeScreenContainer";
 import {
   StyleSheet,
@@ -9,8 +9,8 @@ import {
   Image,
   Pressable,
 } from "react-native";
-import { store } from "../store/ReduxStore";
-import { getData, postInput } from "../store/reducers/serverReducer";
+import { store } from "../store/reducers/storeReducer";
+import { getData, postInput } from "../Server/server";
 import { Feather } from "@expo/vector-icons";
 import { TextButton } from "../components/TextButton";
 import Colors from "../constants/Colors";
@@ -21,8 +21,11 @@ import { AntDesign } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
 import { AuthContext } from "../context/AuthContext";
+import { UserContext} from '../context/UserContext'
 
 export default function ProfileScreen() {
+  const {token} = React.useContext(UserContext);
+
   const navigation = useNavigation();
   const [lastReflection, updateLastReflection] = useState(
     "no previous reflection found"
@@ -38,7 +41,7 @@ export default function ProfileScreen() {
   const dataStore = store.getState().slice(0, 7);
 
   useEffect(() => {
-    const input = getData("/reflection").then((data) => {
+    const input = getData("/reflection", token).then((data) => {
       updateLastReflection(data),
         dispatch({ type: "GET_DATABASE_DATA", payload: data[data.length - 1] });
     });
@@ -46,12 +49,7 @@ export default function ProfileScreen() {
 
   return (
     <HomeScreenContainer
-      style={{
-        justifyContent: "flex-end",
-        alignItems: "flex-start",
-        padding: 0,
-        margin: 0,
-      }}
+      style={styles.homeScreenContainer}
     >
       <IconButton
         style={styles.closeIcon}
@@ -87,7 +85,7 @@ export default function ProfileScreen() {
       {FLisVisible ? (
         <FlatList
           style={{ width: "100%" }}
-          contentContainerStyle={styles.Container}
+          contentContainerStyle={styles.container}
           data={dataStore}
           renderItem={({ item, index }) => (
             <ScrollView key={item.name + 2}>
@@ -175,7 +173,7 @@ export default function ProfileScreen() {
 }
 
 const styles = StyleSheet.create({
-  Container: {
+  container: {
     paddingBottom: 0,
     marginHorizontal: 8,
   },
@@ -184,4 +182,10 @@ const styles = StyleSheet.create({
     top: 60,
     right: 16,
   },
+  homeScreenContainer: {
+    justifyContent: "flex-end",
+    alignItems: "flex-start",
+    padding: 0,
+    margin: 0,
+  }
 });

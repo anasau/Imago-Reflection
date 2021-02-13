@@ -63,7 +63,7 @@ export function reducer(state = initialState, action) {
         }
         return exercise;
       });
-    /// dispatch to create a brand new reflection by deleting the current store, incl id so we create a new entry instead of updaing
+
     default:
       return state;
   }

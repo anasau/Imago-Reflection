@@ -1,18 +1,11 @@
 import React from "react";
 import axios from "axios";
+import { UserContext } from "../context/UserContext";
+import {BASE_URL} from '@env'
 
-import { UserContext } from "../../context/UserContext";
 
-// const BASE_URL = process.env.BASE_URL
-const BASE_URL = "http://192.168.68.111:3001";
+export function getData(endpoint, token) {
 
-export function getData(endpoint) {
-  // const {token} = React.useContext(UserContext);
-  const token =
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI1ZmY1ZGRjMTJjY2UxZDE3YzQxOTMzNGUiLCJlbWFpbCI6ImFuYXNhdUBnbWFpbC5jb20iLCJpYXQiOjE2MTA4MjIxNDIsImV4cCI6MTYxMDgzMjk0Mn0.lNcS3yg1G4KisU18Mh1wgX_lOVNLbTWWcVj4fj4WbRE";
-
-  // const token =process.env.TOKEN
-  // React.useEffect(() => {
   const response = axios
     .get(`${BASE_URL}${endpoint}`, {
       headers: {
@@ -22,16 +15,11 @@ export function getData(endpoint) {
     .then(({ data }) => {
       return data;
     });
-  // }, [token, endpoint]);
   return response;
 }
 
-export function postInput(endpoint, data) {
-  // const token =process.env.TOKEN
-  const token =
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI1ZmY1ZGRjMTJjY2UxZDE3YzQxOTMzNGUiLCJlbWFpbCI6ImFuYXNhdUBnbWFpbC5jb20iLCJpYXQiOjE2MTA4MjIxNDIsImV4cCI6MTYxMDgzMjk0Mn0.lNcS3yg1G4KisU18Mh1wgX_lOVNLbTWWcVj4fj4WbRE";
-  // const {token} = React.useContext(UserContext);
-  // const [resp, setResp] = React.useState('');
+export function postInput(endpoint, data, token) {
+
   const response = axios
     .post(
       `${BASE_URL}${endpoint}`,
@@ -58,11 +46,8 @@ export function postInput(endpoint, data) {
   return response;
 }
 
-export function updateInput(endpoint, data) {
-  const token =
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI1ZmY1ZGRjMTJjY2UxZDE3YzQxOTMzNGUiLCJlbWFpbCI6ImFuYXNhdUBnbWFpbC5jb20iLCJpYXQiOjE2MTA4MjIxNDIsImV4cCI6MTYxMDgzMjk0Mn0.lNcS3yg1G4KisU18Mh1wgX_lOVNLbTWWcVj4fj4WbRE";
-  // const {token} = React.useContext(UserContext);
-  // const [resp, setResp] = React.useState('');
+export function updateInput(endpoint, data, token) {
+  
   try {
     const response = axios
       .put(

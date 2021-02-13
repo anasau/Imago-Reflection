@@ -14,7 +14,7 @@ import { createStore } from "redux";
 import {IconButton} from './components/IconButton';
 import Colors from './constants/Colors'
 
-import {store} from './store/ReduxStore'
+import {store} from './store/reducers/storeReducer'
 
 const RootStack = createStackNavigator();
 

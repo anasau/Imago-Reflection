@@ -8,7 +8,6 @@
     "eject": "expo eject"
   },
   "dependencies": {
-    "@ant-design/react-native": "^4.0.7",
     "@expo/vector-icons": "^12.0.2",
     "@react-native-community/async-storage": "^1.12.1",
     "@react-native-community/cameraroll": "^4.0.1",
@@ -34,7 +33,7 @@
     "react": "16.13.1",
     "react-native": "https://github.com/expo/react-native/archive/sdk-40.0.1.tar.gz",
     "react-native-camera": "^3.42.0",
-    "react-native-countdown-circle-timer": "^2.3.11",
+    "react-native-dotenv": "^2.5.3",
     "react-native-fs": "^2.16.6",
     "react-native-gesture-handler": "~1.8.0",
     "react-native-ionicons": "^4.6.5",

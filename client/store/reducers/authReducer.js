@@ -1,7 +1,7 @@
 import React from "react";
 import axios from "axios";
 import * as SecureStore from "expo-secure-store";
-
+import { BASE_URL } from '@env'
 export function createAction(type, payload) {
   return {
     type,
@@ -15,7 +15,6 @@ export function sleep(ms) {
 
 // reducer
 export function authReducer() {
-  const BASE_URL = "http://192.168.1.26:3001";
 
   const [state, dispatch] = React.useReducer(
     (state, action) => {
@@ -45,32 +44,26 @@ export function authReducer() {
     }
   );
   const auth = React.useMemo(
-    // Memoize hook
     () => ({
-      // 2
       login: async (email, password) => {
         const { data } = await axios.post(`${BASE_URL}/auth/users/login`, {
           email,
           password,
         });
-        // if email and password is correct
-        // extract token data from the user based on email and password  // and save it
+      
         const user = {
           email: data.email,
           token: data.token,
         };
 
-        ///This is to keep you loged in if app is closed
         await SecureStore.setItemAsync("user", JSON.stringify(user));
         dispatch(createAction("SignIn", user));
       },
 
       logout: async () => {
-        // await SecureStore.deleteItemAsync('user');
         dispatch(createAction("SignOut"));
       },
 
-      //1
       register: async (email, password) => {
         await axios.post(`${BASE_URL}/auth/users/signup`, {
           email,
