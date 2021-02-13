@@ -1,0 +1,30 @@
+{
+  "root": true,
+  "parser":"@babel/eslint-parser",
+  "parserOptions": {
+    "ecmaVersion": 2020, // Allows for the parsing of modern ECMAScript features
+    "sourceType": "module", // Allows for the use of imports
+    "ecmaFeatures": {
+      "jsx": true // Allows for the parsing of JSX
+    }
+  },
+  "settings": {
+    "react": {
+      "version": "detect" // Tells eslint-plugin-react to automatically detect the version of React to use
+    }
+  },
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended"    
+  ],
+  "rules": {
+    "indent": ["error", 2],
+    "keyword-spacing": "error",
+    "linebreak-style": "error",
+    "quotes": ["error","single"],
+    "semi": "error",
+    "space-before-blocks": "error",
+    "space-before-function-paren": "error"
+    
+  }
+}

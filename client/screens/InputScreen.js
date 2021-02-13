@@ -4,7 +4,7 @@ import { TextButton } from "../components/TextButton";
 import Colors from "../constants/Colors";
 import { HomeScreenContainer } from "../components/HomeScreenContainer";
 import { CompletedExercise } from "../components/CompletedExercise";
-import { useDispatch, useSelector} from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigation } from "@react-navigation/native";
 
 
@@ -17,13 +17,13 @@ export default function InputScren({ route }) {
 
   let lowerCaseName = name.replace(/\s/g, "").toLowerCase();
 
-  let exercises = useSelector(state => state)
-  let textinput = exercises.filter(
-    (exercise) => exercise.name === lowerCaseName)[0].input;
-   
+  let store = useSelector(state => state)
+
+  let textinput = store.filter(exercise => exercise.name === lowerCaseName)[0].input
+
   const [text, setText] = React.useState(textinput);
-  
-  
+
+
 
   function addInput() {
     if (text.length > 1) {
@@ -46,7 +46,7 @@ export default function InputScren({ route }) {
       <Text style={text}>
         {" "}{name}{" "}
       </Text>
-      <Text> {remainingTime} </Text> 
+      <Text> {remainingTime} </Text>
       <CompletedExercise title="Save input" onPress={() => addInput()} />
       <TextButton
         title="close page"
@@ -60,11 +60,11 @@ export default function InputScren({ route }) {
         value={
           text.slice(0, 4) === "file"
             ? alert(
-                "Image is saved for this exercise. To replace it, save the new input."
-              )
+              "Image is saved for this exercise. To replace it, save the new input."
+            )
             : text.slice(0, 11).trim() === "Reflection"
-            ? ""
-            : text
+              ? ""
+              : text
         }
         onChangeText={(e) => setText(e)}
       />
@@ -83,9 +83,9 @@ const styles = StyleSheet.create({
     marginVertical: 0,
     padding: 10,
   },
-  text: { 
+  text: {
     fontWeight: "bold",
     marginVertical: 10,
-    padding: 2 
+    padding: 2
   }
 });

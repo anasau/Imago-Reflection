@@ -1,11 +1,7 @@
 import React from "react";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
-import HomeScreen from "../screens/HomeScreen";
-import ProfileScreen from "../screens/ProfileScreen";
 import { MainNavigator } from "../navigation/MainNavigator";
 import Colors from "../constants/Colors";
-import { Icon } from "@ant-design/react-native";
-import ReflectionExerciseList from "../screens/ReflectionExerciseList";
 import { ProfileNavigator } from "../navigation/ProfileNavigator";
 
 const Tab = createMaterialTopTabNavigator();
@@ -37,9 +33,7 @@ export function TabNavigator() {
       <Tab.Screen
         name="Home"
         component={MainNavigator}
-        options={{
-          tabBarIcon: () => <Icon name="home" color="red" size={20} />,
-        }}
+     
       />
       <Tab.Screen name="Profile" component={ProfileNavigator} />
     </Tab.Navigator>

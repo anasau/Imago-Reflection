@@ -7,7 +7,6 @@ import {
   View,
   FlatList,
   Image,
-  Pressable,
 } from "react-native";
 import { store } from "../store/reducers/storeReducer";
 import { getData, postInput } from "../Server/server";
@@ -18,33 +17,27 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigation } from "@react-navigation/native";
 import { IconButton } from "../components/IconButton";
 import { AntDesign } from "@expo/vector-icons";
-import { Ionicons } from "@expo/vector-icons";
-import { MaterialIcons } from "@expo/vector-icons";
 import { AuthContext } from "../context/AuthContext";
-import { UserContext} from '../context/UserContext'
-
+import { UserContext } from '../context/UserContext'
+import { stylesheet } from './ProfileScreenStyleSheet'
 export default function ProfileScreen() {
-  const {token} = React.useContext(UserContext);
+  const { token } = React.useContext(UserContext);
 
   const navigation = useNavigation();
-  const [lastReflection, updateLastReflection] = useState(
-    "no previous reflection found"
-  );
-  const [FLisVisible, updateFLisVisible] = useState(false);
+
+  const [FlatListisVisible, updateFLisVisible] = useState(false);
   const dispatch = useDispatch();
 
-  const [loading, setLoading] = React.useState(false);
-  const [error, setError] = React.useState("");
   const { logout } = React.useContext(AuthContext);
 
-  const [modalVisible, setModalVisible] = useState(false);
   const dataStore = store.getState().slice(0, 7);
 
   useEffect(() => {
-    const input = getData("/reflection", token).then((data) => {
+    getData("/reflection", token).then((data) => {
       updateLastReflection(data),
         dispatch({ type: "GET_DATABASE_DATA", payload: data[data.length - 1] });
     });
+
   }, []);
 
   return (
@@ -72,17 +65,13 @@ export default function ProfileScreen() {
       />
       <TextButton
         title="View latest reflection"
-        style={{
-          color: Colors.primary,
-          alignSelf: "flex-start",
-          marginHorizontal: 8,
-        }}
+        style={styles.textButton}
         textStyle={{ alignItems: "flex-start" }}
         onPress={() =>
-          FLisVisible ? updateFLisVisible(false) : updateFLisVisible(true)
+          FlatListisVisible ? updateFLisVisible(false) : updateFLisVisible(true)
         }
       />
-      {FLisVisible ? (
+      {FlatListisVisible ? (
         <FlatList
           style={{ width: "100%" }}
           contentContainerStyle={styles.container}
@@ -93,7 +82,7 @@ export default function ProfileScreen() {
                 <View key={index} style={{ borderRadius: 6 }}>
                   <Image
                     source={{ uri: item.input }}
-                    style={{ height: 100, borderRadius: 6 }}
+                    style={styles.image}
                   />
 
                   <Feather
@@ -107,85 +96,55 @@ export default function ProfileScreen() {
                   />
                 </View>
               ) : (
-                <View
-                  key={item.name}
-                  style={{
-                    borderRadius: 6,
-                    backgroundColor: "#ddd",
-                    margin: 5,
-                    padding: 3,
-                    flexDirection: "row",
-                  }}
-                >
-                  <Text
-                    style={{
-                      marginVertical: 10,
-                      color:
+                  <View
+                    key={item.name}
+                    style={styles.view}
+                  >
+                    <Text
+                      style={styles.exerciseDisplay}
+                      color={
                         item.input.slice(0, 11).trim() === "Reflection"
                           ? "purple"
-                          : Colors.primary,
-                    }}
-                    onPress={() =>
-                      navigation.navigate("View", { input: item.input })
-                    }
-                  >
-                    {" "}
-                    {index + 1 + ": " + item.input.slice(0, 35) + "..."}{" "}
-                  </Text>
+                          : Colors.primary}
+                      onPress={() =>
+                        navigation.navigate("View", { input: item.input })
+                      }
+                    >
+                      {" "}
+                      {index + 1 + ": " + item.input.slice(0, 35) + "..."}
+                      {" "}
+                    </Text>
 
-                  <AntDesign
-                    name="edit"
-                    size={15}
-                    color={Colors.brightorange}
-                    style={{
-                      width: "10%",
-                      marginVertical: 10,
-                      marginHorizontal: 10,
-                    }}
-                    onPress={() => {
-                      navigation.navigate("Exercise", {
-                        name: "Exercise " + +item.name.slice(-1),
-                      }),
-                        updateFLisVisible(false);
-                    }}
-                  />
-                </View>
-              )}
+                    <AntDesign
+                      name="edit"
+                      size={15}
+                      color={Colors.brightorange}
+                      style={styles.editIcon}
+                      onPress={() => {
+                        navigation.navigate("Exercise", {
+                          name: "Exercise " + +item.name.slice(-1),
+                        }),
+                          updateFLisVisible(false);
+                      }}
+                    />
+                  </View>
+                )}
             </ScrollView>
           )}
           keyExtractor={(item, index) => index.toString()}
         />
       ) : (
-        <AntDesign
-          name="down"
-          size={24}
-          color={Colors.brightPink}
-          onPress={() =>
-            FLisVisible ? updateFLisVisible(false) : updateFLisVisible(true)
-          }
-        />
-      )}
-      {/*         
-        {(lastReflection.length> 1 && !FLisVisible) &&  Array.from(lastReflection)
-        .map((each) => <Text key={Math.random()}> {each.createAt} </Text> )} */}
+          <AntDesign
+            name="down"
+            size={24}
+            color={Colors.brightPink}
+            onPress={() =>
+              FlatListisVisible ? updateFLisVisible(false) : updateFLisVisible(true)
+            }
+          />
+        )}
     </HomeScreenContainer>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    paddingBottom: 0,
-    marginHorizontal: 8,
-  },
-  closeIcon: {
-    position: "absolute",
-    top: 60,
-    right: 16,
-  },
-  homeScreenContainer: {
-    justifyContent: "flex-end",
-    alignItems: "flex-start",
-    padding: 0,
-    margin: 0,
-  }
-});
+const styles = StyleSheet.create(stylesheet);
