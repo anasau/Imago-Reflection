@@ -1,5 +1,5 @@
-# Imago Reflection
-Imago Reflection helps you do a deep introspection of the past year by providing a set of questions prepared by a professional coach and a platform to log your thoughts. 
+# HP Reflection
+HP Reflection helps you do a deep introspection of the past year by providing a set of questions prepared by a professional coach and a platform to log your thoughts. 
 
 # Screenshots 
 
