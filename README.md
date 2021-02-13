@@ -1,8 +1,6 @@
 # HP Reflection
 HP Reflection helps you do a deep introspection of the past year by providing a set of questions prepared by a professional coach and a platform to log your thoughts. 
 
-# Screenshots 
-
 <code><img height="500" alt="Home Screen" src="https://github.com/anasau/Imago-Reflection/blob/default/assets/homescreen.jpg"></code>
 <code><img height="500" alt="Exercise 2 " src="https://github.com/anasau/Imago-Reflection/blob/default/assets/pickexercise.jpg"></code>
 <code><img height="500" alt="Reflection Page" src="https://github.com/anasau/Imago-Reflection/blob/default/assets/exercisepage.jpg"></code>
