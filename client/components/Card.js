@@ -1,7 +1,7 @@
 import React from 'react';
-import {StyleSheet, TouchableOpacity} from 'react-native';
+import { StyleSheet, TouchableOpacity } from 'react-native';
 
-export function Card({style, children, onPress}) {
+export function Card({ style, children, onPress }) {
   return (
     <TouchableOpacity style={[styles.card, style]} onPress={onPress}>
       {children}

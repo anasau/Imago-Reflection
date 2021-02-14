@@ -7,7 +7,6 @@ router.get('/', ReflectionDb.getAll);
 
 router.post('/', ReflectionDb.postOne);
 
-
 router.put('/', ReflectionDb.update);
 
 

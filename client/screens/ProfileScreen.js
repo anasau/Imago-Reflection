@@ -1,13 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
 import { HomeScreenContainer } from "../components/HomeScreenContainer";
-import {
-  StyleSheet,
-  Text,
-  ScrollView,
-  View,
-  FlatList,
-  Image,
-} from "react-native";
 import { store } from "../store/reducers/storeReducer";
 import { getData, postInput } from "../Server/server";
 import { Feather } from "@expo/vector-icons";
@@ -19,18 +11,23 @@ import { IconButton } from "../components/IconButton";
 import { AntDesign } from "@expo/vector-icons";
 import { AuthContext } from "../context/AuthContext";
 import { UserContext } from '../context/UserContext'
-import { stylesheet } from './ProfileScreenStyleSheet'
+import { styles } from './StyleSheets/ProfileScreenStyleSheet'
+import {
+  Text,
+  ScrollView,
+  View,
+  FlatList,
+  Image,
+} from "react-native";
+
 export default function ProfileScreen() {
-  const { token } = React.useContext(UserContext);
-
   const navigation = useNavigation();
-
-  const [FlatListisVisible, updateFLisVisible] = useState(false);
   const dispatch = useDispatch();
 
+  const [FlatListisVisible, updateFLisVisible] = useState(false);
+  const { token } = React.useContext(UserContext);
   const { logout } = React.useContext(AuthContext);
-
-  const dataStore = store.getState().slice(0, 7);
+  const dataStore = useSelector(state => state).slice(0, 7);
 
   useEffect(() => {
     getData("/reflection", token).then((data) => {
@@ -50,25 +47,25 @@ export default function ProfileScreen() {
         color={Colors.primary}
         onPress={async () => {
           try {
-            setLoading(true);
             await logout();
           } catch (e) {
             console.log(e);
-            setError(e);
-            setLoading(false);
           }
         }}
       />
       <Image
         source={require("../assets/future2.png")}
-        style={{ height: 100, margin: 0, paddingTop: 0 }}
+        style={styles.cover}
       />
       <TextButton
         title="View latest reflection"
         style={styles.textButton}
         textStyle={{ alignItems: "flex-start" }}
         onPress={() =>
-          FlatListisVisible ? updateFLisVisible(false) : updateFLisVisible(true)
+          FlatListisVisible ?
+            updateFLisVisible(false)
+            :
+            updateFLisVisible(true)
         }
       />
       {FlatListisVisible ? (
@@ -77,9 +74,9 @@ export default function ProfileScreen() {
           contentContainerStyle={styles.container}
           data={dataStore}
           renderItem={({ item, index }) => (
-            <ScrollView key={item.name + 2}>
+            <ScrollView >
               {item.input.slice(0, 4) === "file" ? (
-                <View key={index} style={{ borderRadius: 6 }}>
+                <View style={{ borderRadius: 6 }}>
                   <Image
                     source={{ uri: item.input }}
                     style={styles.image}
@@ -89,7 +86,7 @@ export default function ProfileScreen() {
                     name="zoom-in"
                     size={24}
                     color={Colors.lightGreen}
-                    style={{ position: "absolute", top: 10, right: 5 }}
+                    style={styles.zoomInIcon}
                     onPress={() => {
                       navigation.navigate("Picture", { input: item.input });
                     }}
@@ -97,8 +94,7 @@ export default function ProfileScreen() {
                 </View>
               ) : (
                   <View
-                    key={item.name}
-                    style={styles.view}
+                    style={styles.exerciseList}
                   >
                     <Text
                       style={styles.exerciseDisplay}
@@ -110,9 +106,7 @@ export default function ProfileScreen() {
                         navigation.navigate("View", { input: item.input })
                       }
                     >
-                      {" "}
                       {index + 1 + ": " + item.input.slice(0, 35) + "..."}
-                      {" "}
                     </Text>
 
                     <AntDesign
@@ -146,5 +140,3 @@ export default function ProfileScreen() {
     </HomeScreenContainer>
   );
 }
-
-const styles = StyleSheet.create(stylesheet);

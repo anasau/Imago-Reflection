@@ -35,7 +35,6 @@ const reflectionSchema =  new Schema ({
 
 }, {timestamps:true}); 
 
-// this creates and database and also provide all the methods which we can use to add / extract data 
 const ReflectionDb = mongoose.model('updatedDb', reflectionSchema); 
 
 module.exports = ReflectionDb; 

@@ -3,7 +3,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import ModalScreen from "../screens/Modal";
 import ProfileScreen from "../screens/ProfileScreen";
-import Picture from "../screens/Picture";
+import Picture from "../screens/PictureScreen";
 import ExerciseNavigator from "./ExerciseNavigator";
 import Exercise from "../screens/Exercise";
 import ReflectionExerciseList from "../screens/ReflectionExerciseList";
@@ -14,21 +14,32 @@ const ProfileStack = createStackNavigator();
 
 export function ProfileNavigator() {
   return (
-    // <NavigationContainer>
     <ProfileStack.Navigator
       mode={"modal"}
       screenOptions={{
         headerShown: false,
       }}
     >
-      <ProfileStack.Screen name={"Profile"} component={ProfileScreen} />
-      <ProfileStack.Screen name={"View"} component={ModalScreen} />
-      <ProfileStack.Screen name={"Picture"} component={Picture} />
+      <ProfileStack.Screen
+        name={"Profile"}
+        component={ProfileScreen}
+      />
+      <ProfileStack.Screen
+        name={"View"}
+        component={ModalScreen}
+      />
+      <ProfileStack.Screen
+        name={"Picture"}
+        component={Picture}
+      />
       <ProfileStack.Screen
         name={"ExerciseNavigator"}
         component={ExerciseNavigator}
       />
-      <ProfileStack.Screen name={"Exercise"} component={Exercise} />
+      <ProfileStack.Screen
+        name={"Exercise"}
+        component={Exercise}
+      />
       <ProfileStack.Screen
         name={"ReflectionExerciseList"}
         component={ReflectionExerciseList}
@@ -38,8 +49,10 @@ export function ProfileNavigator() {
         component={CameraScreen}
         initialParams={{ nextEx: 1 }}
       />
-      <ProfileStack.Screen name={"Input"} component={InputScreen} />
+      <ProfileStack.Screen
+        name={"Input"}
+        component={InputScreen}
+      />
     </ProfileStack.Navigator>
-    // </NavigationContainer>
   );
 }

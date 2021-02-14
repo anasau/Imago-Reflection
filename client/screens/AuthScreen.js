@@ -72,7 +72,6 @@ const styles = StyleSheet.create({
   loginButton: {
     marginVertical: 32,
     backgroundColor: Colors.accent,
-    // color:Colors.primary
   },
   welcome: {
     flexDirection: "row",

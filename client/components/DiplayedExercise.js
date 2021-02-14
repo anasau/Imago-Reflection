@@ -1,21 +1,19 @@
-import React, { useState } from "react";
-import { StyleSheet, Text, View } from "react-native";
-import { ImageComponent } from "../components/ImageComponent";
-import Colors from "../constants/Colors";
-import { HomeScreenContainer } from "../components/HomeScreenContainer";
-import { Heading } from "../components/Heading";
-import { StartExerciseButton } from "../components/StartExerciseButton";
+import React from "react";
+import { Text, View } from "react-native";
+import { ImageComponent } from "./ImageComponent";
+import { HomeScreenContainer } from "./HomeScreenContainer";
+import { Heading } from "./Heading";
+import { StartExerciseButton } from "./StartExerciseButton";
 import { useNavigation } from "@react-navigation/native";
 import { AntDesign } from "@expo/vector-icons";
-import { Instruction } from "../components/Instruction";
-import { TextButton } from "../components/TextButton";
+import { Instruction } from "./Instruction";
+import { TextButton } from "./TextButton";
+import { styles } from './StyleSheets/DiplayedExercise'
 
 export function DisplayedExercise(props) {
   const navigation = useNavigation();
 
   const { name, title, text, image } = props.exercise;
-  // const previousExercise = props.previousExercise;
-  // const nextExercise = props.nextExercise;
 
   function navigateToExercise() {
     navigation.navigate("Exercise", { name: name });
@@ -24,12 +22,13 @@ export function DisplayedExercise(props) {
   function goBackOneStep() {
     navigation.goBack();
   }
+  const instruction = 'Read through the set of exercises prior to starting to journal.'
+
   return (
     <HomeScreenContainer style={styles.screen}>
       <Heading> Imago Reflection </Heading>
       <Instruction>
-        {" "}
-        Read through the set of exercises prior to starting to journal.{" "}
+        {instruction}
       </Instruction>
       <View style={styles.carousel}>
         <AntDesign
@@ -46,10 +45,20 @@ export function DisplayedExercise(props) {
           onPress={() => props.goToNextExerc()}
         />
       </View>
-      <Text style={styles.question}> {title} </Text>
-      <ImageComponent source={image} style={styles.image} />
-      <View style={styles.view}>
-        <Text style={styles.exercise}> {text} </Text>
+      <Text style={styles.question}>
+        {title}
+      </Text>
+      <ImageComponent
+        source={image}
+        style={styles.image}
+      />
+      <View
+        style={styles.view}
+      >
+        <Text
+          style={styles.exercise}>
+          {text}
+        </Text>
       </View>
       <StartExerciseButton
         title="Start reflecting"
@@ -58,57 +67,8 @@ export function DisplayedExercise(props) {
       <TextButton
         title="go back"
         onPress={() => goBackOneStep()}
-        style={{ fontSize: 12, color: "black" }}
+        style={styles.textbutton}
       />
     </HomeScreenContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  exercise: {
-    width: "90%",
-    textAlign: "center",
-    paddingVertical: 20,
-    color: "black",
-  },
-  screen: {
-    marginBottom: 20,
-  },
-  view: {
-    backgroundColor: "white",
-    opacity: 0.7,
-    width: "90%",
-    borderRadius: 14,
-  },
-  exerciseTitle: {
-    width: "30%",
-    color: "black",
-    textAlign: "center",
-    fontWeight: "bold",
-    fontSize: 20,
-    // paddingHorizontal:10,
-  },
-  carousel: {
-    marginVertical: 20,
-    flexDirection: "row",
-    justifyContent: "space-between",
-  },
-  question: {
-    backgroundColor: Colors.primary,
-    color: "white",
-    fontWeight: "bold",
-    //  maxWidth:'90%',
-    textAlign: "center",
-  },
-  image: {
-    width: "80%",
-  },
-  container: {
-    width: "50%",
-    height: 30,
-    alignItems: "center",
-    justifyContent: "center",
-    padding: 20,
-    borderRadius: 8,
-  },
-});

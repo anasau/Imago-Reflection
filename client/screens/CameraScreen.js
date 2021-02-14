@@ -3,7 +3,6 @@ import { Button, Image, View, Platform, StyleSheet } from "react-native";
 import { FilledButton } from "../components/FilledButton";
 import * as ImagePicker from "expo-image-picker";
 import Colors from "../constants/Colors";
-// import Constants from 'expo-constants';
 import * as Permissions from "expo-permissions";
 import { AntDesign } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
@@ -40,9 +39,6 @@ export default function CameraScreen({ route }) {
       aspect: [4, 3],
       quality: 1,
     });
-
-    console.log(result);
-
     if (!result.cancelled) {
       setImage(result.uri);
     }
@@ -55,7 +51,6 @@ export default function CameraScreen({ route }) {
     }
     const image = await ImagePicker.launchCameraAsync({
       allowsEditing: false,
-      // aspect: [9, 12],
       quality: 1,
     });
 
@@ -88,22 +83,16 @@ export default function CameraScreen({ route }) {
     return true;
   };
   return (
-    <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
+    <View style={styles.view}>
       <View
-        style={{
-          width: "90%",
-          position: "absolute",
-          top: 120,
-          right: 16,
-          flexDirection: "row",
-          justifyContent: "space-between",
-        }}
+        style={styles.container}
       >
         <Ionicons
           name="ios-arrow-back"
           size={24}
           color={Colors.primary}
-          onPress={() => navigation.navigate("Exercise", { name: name })}
+          onPress={() =>
+            navigation.navigate("Exercise", { name: name })}
         />
         {image && (
           <AntDesign
@@ -120,7 +109,9 @@ export default function CameraScreen({ route }) {
         onPress={pickImage}
       />
       {image && (
-        <Image source={{ uri: image }} style={{ width: 200, height: 300 }} />
+        <Image
+          source={{ uri: image }}
+          style={styles.selectedImage} />
       )}
       <FilledButton
         title="Take Image"
@@ -148,4 +139,21 @@ const styles = StyleSheet.create({
     width: "100%",
     height: "100%",
   },
+  view: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center"
+  },
+  selectedImage: {
+    width: 200,
+    height: 300
+  },
+  container: {
+    width: "90%",
+    position: "absolute",
+    top: 120,
+    right: 16,
+    flexDirection: "row",
+    justifyContent: "space-between",
+  }
 });

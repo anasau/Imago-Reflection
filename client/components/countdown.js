@@ -18,13 +18,13 @@ export function CountDown(props) {
             onPress={() => props.pauseCount()}
           />
         ) : (
-          <Ionicons
-            name="play-circle-outline"
-            size={24}
-            color="black"
-            onPress={() => props.count()}
-          />
-        )}
+            <Ionicons
+              name="play-circle-outline"
+              size={24}
+              color="black"
+              onPress={() => props.count()}
+            />
+          )}
         <Ionicons
           name="ios-play-forward-circle-outline"
           size={24}

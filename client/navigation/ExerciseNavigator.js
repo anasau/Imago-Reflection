@@ -10,7 +10,6 @@ const ExerciseStack = createStackNavigator();
 
 export default function ExerciseNavigator() {
   return (
-    // <NavigationContainer>
     <ExerciseStack.Navigator
       mode={"modal"}
       screenOptions={{
@@ -25,6 +24,5 @@ export default function ExerciseNavigator() {
       <ExerciseStack.Screen name={"Input"} component={InputScreen} />
       <ExerciseStack.Screen name={"Camera"} component={CameraScreen} />
     </ExerciseStack.Navigator>
-    // </NavigationContainer>
   );
 }

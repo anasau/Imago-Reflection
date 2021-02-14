@@ -21,16 +21,6 @@ const getUsers = async (req, res, next) => {
 };
 
 const signup = async (req, res, next) => {
- // to do 
-  // const errors = validationResult(req);
-  // console.log(errors, 'errors')
-
-  // if (!errors.isEmpty()) {
-  //   return next(
-  //     new HttpError('Invalid inputs passed, please check your data.', 422)
-  //   );
-  // }
-
 
   const { email, password } = req.body;
 
@@ -68,7 +58,6 @@ const signup = async (req, res, next) => {
   const createdUser = new User({
     email,
     password: hashedPassword,
-    // places: []
   });
 
   try {
@@ -82,7 +71,6 @@ const signup = async (req, res, next) => {
   }
 
 
-  // generating the token 
   let token;
   const secret = process.env.SECRET
   try {

@@ -5,11 +5,7 @@ import { Input } from "../components/Input";
 import { FilledButton } from "../components/FilledButton";
 import { Error } from "../components/Error";
 import { IconButton } from "../components/IconButton";
-import { AuthContainer } from "../components/AuthContainer";
-import { AuthContext } from "../context/AuthContext";
-import { Loading } from "../components/Loading";
 import Colors from "../constants/Colors";
-import { Design } from "@expo/vector-icons";
 
 export function RegistrationScreen({ navigation }) {
   const { register } = React.useContext(AuthContext);
@@ -29,7 +25,9 @@ export function RegistrationScreen({ navigation }) {
         }}
       />
       <View style={styles.welcome}>
-        <Heading style={styles.title}>Welcome to Imago </Heading>
+        <Heading style={styles.title}>
+          Welcome to Imago
+        </Heading>
       </View>
       <Error error={error} />
       <Input

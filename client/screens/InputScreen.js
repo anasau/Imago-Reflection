@@ -9,11 +9,10 @@ import { useNavigation } from "@react-navigation/native";
 
 
 export default function InputScren({ route }) {
+  const dispatch = useDispatch();
   const navigation = useNavigation();
   const { name, remainingTime } = route.params;
   const [nextExercise, updateNextExercise] = useState(+name.slice(-1) + 1);
-  const dispatch = useDispatch();
-
 
   let lowerCaseName = name.replace(/\s/g, "").toLowerCase();
 
@@ -22,7 +21,6 @@ export default function InputScren({ route }) {
   let textinput = store.filter(exercise => exercise.name === lowerCaseName)[0].input
 
   const [text, setText] = React.useState(textinput);
-
 
 
   function addInput() {

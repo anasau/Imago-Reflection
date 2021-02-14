@@ -1,4 +1,6 @@
-export const  stylesheet = {
+import Colors from "../../constants/Colors";
+
+export const styles = {
   container: {
     paddingBottom: 0,
     marginHorizontal: 8,
@@ -14,7 +16,7 @@ export const  stylesheet = {
     padding: 0,
     margin: 0,
   },
-  view: {
+  exerciseList: {
     borderRadius: 6,
     backgroundColor: "#ddd",
     margin: 5,
@@ -37,6 +39,14 @@ export const  stylesheet = {
   image: {
     height: 100,
     borderRadius: 6
+  },
+  cover: {
+    height: 100,
+    margin: 0,
+    paddingTop: 0
+  },
+  zoomInIcon: {
+    position: "absolute",
+    top: 10, right: 5
   }
-
 }

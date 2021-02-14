@@ -1,39 +1,7 @@
-import React, { useState } from "react";
-import { useNavigation } from "@react-navigation/native";
-import { HomeScreenContainer } from "../components/HomeScreenContainer";
-import {
-  Image,
-  StyleSheet,
-  Text,
-  TouchableHighlight,
-} from "react-native";
-import Colors from "../constants/Colors";
+import Colors from "../../constants/Colors";
 
-export default function Picture({ route }) {
-  const navigation = useNavigation();
-  const { input } = route.params;
 
-  return (
-    <HomeScreenContainer style={{ flex: 1 }}>
-      <Image
-        source={{ uri: input }}
-        style={styles.imageStyle}
-      />
-      <TouchableHighlight
-        style={styles.touchableHighlight}
-        onPress={() => {
-          navigation.goBack();
-        }}
-      >
-        <Text style={styles.textStyle}>
-          Close view
-        </Text>
-      </TouchableHighlight>
-    </HomeScreenContainer>
-  );
-}
-
-const styles = StyleSheet.create({
+export const styles = {
   centeredView: {
     flex: 1,
     justifyContent: "center",
@@ -89,4 +57,4 @@ const styles = StyleSheet.create({
     right: 150,
     backgroundColor: Colors.accent
   }
-});
+}

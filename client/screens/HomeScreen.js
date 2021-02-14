@@ -4,7 +4,6 @@ import { Heading } from "../components/Heading";
 // import {Input} from '../components/Input';
 import { ImageComponent } from "../components/ImageComponent";
 import { FilledButton } from "../components/FilledButton";
-import { Error } from "../components/Error";
 import { IconButton } from "../components/IconButton";
 import { AuthContainer } from "../components/AuthContainer";
 import { AuthContext } from "../context/AuthContext";
@@ -59,10 +58,13 @@ export default function HomeScreen() {
           }
         }}
       />
-
-      <Heading style={styles.title}> Welcome, time to reflect Ana! </Heading>
+      <Heading style={styles.title}>
+        Welcome, time to reflect Ana!
+      </Heading>
       <ImageComponent source={require("../assets/S1B9LKEw.jpeg")} />
-      <Text style={styles.container}> {instruction} </Text>
+      <Text style={styles.container}>
+        {instruction}
+      </Text>
       <FilledButton
         title={state}
         style={styles.startReflection}

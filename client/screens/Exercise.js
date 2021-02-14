@@ -10,13 +10,11 @@ import { CountDown } from "../components/countdown";
 import { store } from "../store/reducers/storeReducer";
 import { postInput, updateInput } from "../Server/server";
 import { TextButton } from "../components/TextButton";
-import { UserContext} from '../context/UserContext'
+import { UserContext } from '../context/UserContext'
 
 export default function Exercise({ route }) {
-  const {token} = React.useContext(UserContext);
-
-  const { name } = route.params;
-  const [NAME, UDPATENAME] = useState(name);
+  const { token } = React.useContext(UserContext);
+  const [name, updateName] = useState(route.params.name);
   const [id, updateId] = useState(
     store.getState().filter((object) => object.name === "_id")[0].input
   );
@@ -34,7 +32,6 @@ export default function Exercise({ route }) {
       exercise7: dataStore[6].input,
     };
     updateMessage("");
-    console.log("new reflection is being created ");
     const result = postInput("/reflection", data, token).then((data) =>
       updateMessage(data)
     );
@@ -54,14 +51,12 @@ export default function Exercise({ route }) {
       exercise7: dataStore[6].input,
     };
     updateMessage("");
-    console.log("edit is happening with data", data);
     const edit = updateInput("/reflection", data, token).then((data) =>
       updateMessage("Reflection has been successfully submitted.")
     );
     return edit;
   };
 
-  //timer
   const [remainingTime, updateRemainingTime] = useState(90);
   const [counterOn, updateCounterOn] = useState(false);
 
@@ -78,39 +73,35 @@ export default function Exercise({ route }) {
     updateCounterOn(false);
   }
 
-  /// this the navigation
 
   const navigation = useNavigation();
 
-  // passing the last exercise so the page updates accordingly
   function goBackOneStep() {
     updateMessage("");
-    navigation.navigate("ReflectionExerciseList", { lastexercise: NAME });
+    navigation.navigate("ReflectionExerciseList", { lastexercise: name });
   }
 
-  //Add insight and add picture buttons functions - add picture is wip
   function openCamera() {
     updateMessage("");
-    navigation.navigate("Camera", { name: NAME });
+    navigation.navigate("Camera", { name: name });
   }
 
   function addInput() {
     updateMessage("");
-    navigation.navigate("Input", { name: NAME, remainingTime: remainingTime });
+    navigation.navigate("Input", { name: name, remainingTime: remainingTime });
   }
 
   function nextExerciseFunc() {
     updateMessage("");
-    if (NAME.slice(-1) < 7) {
-      UDPATENAME((NAME) => NAME.slice(0, -1) + Number(+NAME.slice(-1) + 1));
+    if (name.slice(-1) < 7) {
+      updateName((name) => name.slice(0, -1) + Number(+name.slice(-1) + 1));
     }
   }
 
   function goBackOneStep() {
-    navigation.navigate("ReflectionExerciseList", { name: NAME.slice(-1) });
+    navigation.navigate("ReflectionExerciseList", { name: name.slice(-1) });
   }
 
-  // input for Instruction element
   const instruction =
     "Before starting this exercise, set a timer. Check tips throughout the exercise or get in touch with the couch for guidance. Enjoy! ";
 
@@ -122,11 +113,13 @@ export default function Exercise({ route }) {
           id.length > 5 ? updateReflection() : completeReflection();
         }}
       />
-      <Text style={{ color: "blue", marginVertical: 10 }}> {message} </Text>
-      <Instruction> {instruction} </Instruction>
+      <Text style={styles.textMessage}> {message} </Text>
+      <Instruction>
+        {instruction}
+      </Instruction>
       <Image
         source={require("../assets/reflection.png")}
-        style={{ width: 150, height: 150 }}
+        style={styles.image}
       />
       <View style={styles.view}>
         <FilledButton
@@ -134,9 +127,7 @@ export default function Exercise({ route }) {
           style={styles.navButton}
           textStyle={styles.textStyle}
           onPress={() => goBackOneStep()}
-        >
-          {" "}
-        </FilledButton>
+        />
         <CountDown
           remainingTime={remainingTime}
           count={count}
@@ -148,25 +139,21 @@ export default function Exercise({ route }) {
           style={styles.navButton}
           textStyle={styles.textStyle}
           onPress={() => nextExerciseFunc()}
-        >
-          {" "}
-        </FilledButton>
+        />
       </View>
-      <Text style={styles.title}> {NAME} </Text>
+      <Text style={styles.title}>
+        {name}
+      </Text>
       <FilledButton
         title="Add Insight"
         style={styles.inputButton}
         onPress={() => addInput()}
-      >
-        {" "}
-      </FilledButton>
+      />
       <FilledButton
         title="Add Picture"
         style={styles.inputButton}
         onPress={() => openCamera()}
-      >
-        {" "}
-      </FilledButton>
+      />
       <TextButton
         title="go back"
         onPress={() => goBackOneStep()}
@@ -205,4 +192,12 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     marginBottom: 10,
   },
+  textMessage: {
+    color: "blue",
+    marginVertical: 10
+  },
+  image: {
+    width: 150,
+    height: 150
+  }
 });

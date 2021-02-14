@@ -13,7 +13,6 @@ export function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
-// reducer
 export function authReducer() {
 
   const [state, dispatch] = React.useReducer(

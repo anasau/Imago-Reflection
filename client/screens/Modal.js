@@ -1,16 +1,15 @@
 import React, { useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { HomeScreenContainer } from "../components/HomeScreenContainer";
+import Colors from "../constants/Colors";
 import {
   Alert,
-  Image,
   Modal,
   StyleSheet,
   Text,
   TouchableHighlight,
   View,
 } from "react-native";
-import Colors from "../constants/Colors";
 
 export default function ModalScreen({ route }) {
   const navigation = useNavigation();
@@ -32,8 +31,7 @@ export default function ModalScreen({ route }) {
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
             <Text multiline style={styles.modalText}>
-              {" "}
-              {input}{" "}
+              {input}
             </Text>
             <TouchableHighlight
               style={{ ...styles.openButton, backgroundColor: Colors.accent }}
