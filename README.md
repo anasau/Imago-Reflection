@@ -15,10 +15,12 @@ git clone https://github.com/anasau/Imago-Reflection.git
 cd imago-reflect
 
 
-2. Install dependencies
-npm install
+2. Install dependencies both on client and backend 
+npm install 
 
-3. Start development server
+3. update .envexample files 
+
+4. Start development server
 npm start
 
 4. Scan the barcode with the Expo app on your phone or follow the terminal instructions to load up the emulator on your machine.
