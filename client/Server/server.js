@@ -1,11 +1,9 @@
 import React from "react";
 import axios from "axios";
-import { UserContext } from "../context/UserContext";
 import {BASE_URL} from '@env'
 
 
 export function getData(endpoint, token) {
-
   const response = axios
     .get(`${BASE_URL}${endpoint}`, {
       headers: {
@@ -47,7 +45,6 @@ export function postInput(endpoint, data, token) {
 }
 
 export function updateInput(endpoint, data, token) {
-  
   try {
     const response = axios
       .put(

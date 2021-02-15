@@ -20,7 +20,6 @@ export default function HomeScreen() {
   const [state, updateState] = useState("Start New Reflection");
 
   //navigation
-
   const navigation = useNavigation();
 
   function navigateToExerciseList() {

@@ -2,6 +2,7 @@ import React from "react";
 import axios from "axios";
 import * as SecureStore from "expo-secure-store";
 import { BASE_URL } from '@env'
+
 export function createAction(type, payload) {
   return {
     type,
@@ -14,7 +15,6 @@ export function sleep(ms) {
 }
 
 export function authReducer() {
-
   const [state, dispatch] = React.useReducer(
     (state, action) => {
       switch (action.type) {
@@ -45,6 +45,7 @@ export function authReducer() {
   const auth = React.useMemo(
     () => ({
       login: async (email, password) => {
+ 
         const { data } = await axios.post(`${BASE_URL}/auth/users/login`, {
           email,
           password,
@@ -69,6 +70,7 @@ export function authReducer() {
           password,
         });
       },
+
     }),
     []
   );

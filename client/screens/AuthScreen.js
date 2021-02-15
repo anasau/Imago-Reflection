@@ -9,11 +9,12 @@ import { AuthContainer } from "../components/AuthContainer";
 import { AuthContext } from "../context/AuthContext";
 import { Loading } from "../components/Loading";
 import Colors from "../constants/Colors";
+import {username, pass} from'@env'
 
 export function AuthScreen({ navigation }) {
   const { login } = React.useContext(AuthContext);
-  const [email, setEmail] = React.useState("anasau@gmail.com");
-  const [password, setPassword] = React.useState("1q2w3e");
+  const [email, setEmail] = React.useState(username);
+  const [password, setPassword] = React.useState(pass);
   const [loading, setLoading] = React.useState(false);
   const [error, setError] = React.useState("");
 

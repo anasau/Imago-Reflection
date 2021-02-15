@@ -31,7 +31,6 @@ export default function ProfileScreen() {
 
   useEffect(() => {
     getData("/reflection", token).then((data) => {
-      updateLastReflection(data),
         dispatch({ type: "GET_DATABASE_DATA", payload: data[data.length - 1] });
     });
 

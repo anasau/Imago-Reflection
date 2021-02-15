@@ -12,11 +12,10 @@ import { Loading } from '../components/Loading'
 
 export function RegistrationScreen({ navigation }) {
   const { register } = React.useContext(AuthContext);
-  const [email, setEmail] = React.useState("anasau@gmail.com");
-  const [password, setPassword] = React.useState("1q2w3e");
+  const [email, setEmail] = React.useState();
+  const [password, setPassword] = React.useState();
   const [loading, setLoading] = React.useState(false);
   const [error, setError] = React.useState("");
-
   return (
     <AuthContainer>
       <IconButton
