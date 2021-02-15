@@ -33,7 +33,8 @@ export default function Exercise({ route }) {
     };
     updateMessage("");
     const result = postInput("/reflection", data, token).then((data) =>
-      updateMessage(data)
+      updateMessage(data), 
+      console.log('ADBdskcbSD,V')
     );
     return result;
   };

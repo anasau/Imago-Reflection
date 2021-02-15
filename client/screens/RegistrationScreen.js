@@ -6,11 +6,14 @@ import { FilledButton } from "../components/FilledButton";
 import { Error } from "../components/Error";
 import { IconButton } from "../components/IconButton";
 import Colors from "../constants/Colors";
+import { AuthContainer } from "../components/AuthContainer";
+import { AuthContext } from "../context/AuthContext";
+import { Loading } from '../components/Loading'
 
 export function RegistrationScreen({ navigation }) {
   const { register } = React.useContext(AuthContext);
-  const [email, setEmail] = React.useState("anasau28@gmail.com");
-  const [password, setPassword] = React.useState("password");
+  const [email, setEmail] = React.useState("anasau@gmail.com");
+  const [password, setPassword] = React.useState("1q2w3e");
   const [loading, setLoading] = React.useState(false);
   const [error, setError] = React.useState("");
 

@@ -1,11 +1,10 @@
-const  ReflectionDb= require ('../models/model'); 
+const ReflectionDb = require('../models/model');
 
-exports.getAll = async (req, res) => { 
-
+exports.getAll = async (req, res) => {
 
   try {
-    const reflection = await ReflectionDb.find(); 
-    res.status =201; 
+    const reflection = await ReflectionDb.find();
+    res.status = 201;
     res.send(reflection);
   } catch (e) {
     res.sendStatus(500);
@@ -15,41 +14,41 @@ exports.getAll = async (req, res) => {
 };
 
 
-exports.postOne =  async (req, res) => { 
-  const {_id, exercise1, exercise2, exercise3, exercise4, exercise5, exercise6,exercise7} = req.body;
-  
+exports.postOne = async (req, res) => {
+  const { _id, exercise1, exercise2, exercise3, exercise4, exercise5, exercise6, exercise7 } = req.body;
+
   try {
     const reflection = await ReflectionDb.create({
-      _id:_id,
-      exercise1:exercise1, 
-      exercise2:exercise2, 
-      exercise3:exercise3, 
-      exercise4:exercise4, 
-      exercise6:exercise6, 
-      exercise5:exercise5, 
-      exercise7:exercise7,    
-     });  
+      _id: _id,
+      exercise1: exercise1,
+      exercise2: exercise2,
+      exercise3: exercise3,
+      exercise4: exercise4,
+      exercise6: exercise6,
+      exercise5: exercise5,
+      exercise7: exercise7,
+    });
 
-    res.status(200); 
-    res.send (reflection);
+    res.status(200);
+    res.send(reflection);
   } catch (e) {
     res.sendStatus = 500;
-    res.send(e); 
+    res.send(e);
   }
 };
 
 
 
-exports.update =  async (req, res) => { 
-  const {_id, exercise1, exercise2, exercise3, exercise4, exercise5, exercise6,exercise7} = req.body;
+exports.update = async (req, res) => {
+  const { _id, exercise1, exercise2, exercise3, exercise4, exercise5, exercise6, exercise7 } = req.body;
   try {
-    const response = await ReflectionDb.findByIdAndUpdate({_id:_id}, 
-      {exercise1, exercise2, exercise3, exercise4, exercise5, exercise6, exercise7}, {new:true});  
-    res.status(200); 
-    res.send (response);
+    const response = await ReflectionDb.findByIdAndUpdate({ _id: _id },
+      { exercise1, exercise2, exercise3, exercise4, exercise5, exercise6, exercise7 }, { new: true });
+    res.status(200);
+    res.send(response);
   } catch (e) {
     res.status(500);
-    res.send(e); 
+    res.send(e);
   }
 };
 

@@ -1,7 +1,7 @@
 
 const express = require('express');
-const app = express (); 
-const mainRouter = require('./routers/router'); 
+const app = express();
+const mainRouter = require('./routers/router');
 const usersRouter = require('./routers/users-router')
 const mongoose = require('mongoose');
 const cors = require('cors');
@@ -10,11 +10,11 @@ const HttpError = require('./models/http-error');
 require('dotenv').config()
 
 
-const PORT = process.env.PORT;  
-const username =process.env.DB_USERNAME
-const password =process.env.DB_PASSWORD
+const PORT = process.env.PORT;
+const username = process.env.DB_USERNAME
+const password = process.env.DB_PASSWORD
 
-app.use(cors()); 
+app.use(cors());
 app.use(bodyParser.json());
 
 app.use('/reflection', mainRouter);
@@ -35,15 +35,15 @@ app.use((error, req, res, next) => {
 });
 
 
-const mongoConnection= `mongodb+srv://${username}:${password}@cluster0.cqkmv.mongodb.net/test?retryWrites=true&w=majority`;
+const mongoConnection = `mongodb+srv://${username}:${password}@cluster0.cqkmv.mongodb.net/test?retryWrites=true&w=majority`;
 
-mongoose.connect(mongoConnection, {useNewUrlParser:true, useUnifiedTopology:true,   useCreateIndex: true, useFindAndModify:false})
-  .then((result)=> {
+mongoose.connect(mongoConnection, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true, useFindAndModify: false })
+  .then((result) => {
     console.log('connected to db');
-    app.listen(PORT,  ()=> { 
+    app.listen(PORT, () => {
       console.log('server running');
     });
-  }).catch((e) => { 
-    console.log(e); 
-  }); 
+  }).catch((e) => {
+    console.log(e);
+  });
 

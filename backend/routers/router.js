@@ -5,8 +5,7 @@ const ReflectionDb = require('../controller/controller');
 
 router.get('/', ReflectionDb.getAll);
 
-router.post('/', ReflectionDb.postOne);
-
+router.post('/', () => console.log('hsjdhcbDJCS'))
 router.put('/', ReflectionDb.update);
 
 
