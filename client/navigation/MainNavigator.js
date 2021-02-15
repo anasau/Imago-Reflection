@@ -13,6 +13,7 @@ export function MainNavigator(props) {
       screenOptions={{
         headerShown: false,
       }}
+
     >
       <MainStack.Screen name={"Home"} component={HomeScreen} />
 

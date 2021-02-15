@@ -8,8 +8,8 @@ export function HomeScreenContainer({ children }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 16,
-    paddingTop: 120,
+    padding: 10,
+    paddingTop: 110,
     alignItems: "center",
     backgroundColor: "white",
   },

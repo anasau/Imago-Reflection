@@ -31,15 +31,13 @@ export default function ProfileScreen() {
 
   useEffect(() => {
     getData("/reflection", token).then((data) => {
-        dispatch({ type: "GET_DATABASE_DATA", payload: data[data.length - 1] });
+      dispatch({ type: "GET_DATABASE_DATA", payload: data[data.length - 1] });
     });
 
   }, []);
 
   return (
-    <HomeScreenContainer
-      style={styles.homeScreenContainer}
-    >
+    <HomeScreenContainer>
       <IconButton
         style={styles.closeIcon}
         name={"sign-out"}
@@ -52,12 +50,12 @@ export default function ProfileScreen() {
           }
         }}
       />
-      <Image
+      {/* <Image
         source={require("../assets/future2.png")}
         style={styles.cover}
-      />
+      /> */}
       <TextButton
-        title="View latest reflection"
+        title="Your latest reflection"
         style={styles.textButton}
         textStyle={{ alignItems: "flex-start" }}
         onPress={() =>
@@ -67,7 +65,6 @@ export default function ProfileScreen() {
             updateFLisVisible(true)
         }
       />
-      {FlatListisVisible ? (
         <FlatList
           style={{ width: "100%" }}
           contentContainerStyle={styles.container}
@@ -78,7 +75,7 @@ export default function ProfileScreen() {
                 <View style={{ borderRadius: 6 }}>
                   <Image
                     source={{ uri: item.input }}
-                    style={styles.image}
+                    style={styles.exerciseList}
                   />
 
                   <Feather
@@ -126,16 +123,7 @@ export default function ProfileScreen() {
           )}
           keyExtractor={(item, index) => index.toString()}
         />
-      ) : (
-          <AntDesign
-            name="down"
-            size={24}
-            color={Colors.brightPink}
-            onPress={() =>
-              FlatListisVisible ? updateFLisVisible(false) : updateFLisVisible(true)
-            }
-          />
-        )}
+  
     </HomeScreenContainer>
   );
 }

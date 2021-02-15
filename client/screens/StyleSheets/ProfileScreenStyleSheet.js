@@ -10,18 +10,14 @@ export const styles = {
     top: 60,
     right: 16,
   },
-  homeScreenContainer: {
-    justifyContent: "flex-end",
-    alignItems: "flex-start",
-    padding: 0,
-    margin: 0,
-  },
+
   exerciseList: {
     borderRadius: 6,
     backgroundColor: "#ddd",
     margin: 5,
     padding: 3,
     flexDirection: "row",
+    height:60
   },
   textButton: {
     color: Colors.primary,

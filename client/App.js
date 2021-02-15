@@ -30,7 +30,7 @@ export default function () {
         component={SplashScreen} />;
     }
     return state.user ? (
-      <RootStack.Screen name={'MainStack'}>
+      <RootStack.Screen name={'MainStack'} >
         {() => (
           <UserContext.Provider value={state.user}>
             <IconButton
