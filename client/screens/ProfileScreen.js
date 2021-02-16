@@ -22,10 +22,9 @@ import {
 export default function ProfileScreen() {
   const navigation = useNavigation();
   const dispatch = useDispatch();
-
+  const dataStore = useSelector(state => state).slice(0, 7);
   const [FlatListisVisible, updateFLisVisible] = useState(false);
   const { logout } = React.useContext(AuthContext);
-  const dataStore = useSelector(state => state).slice(0, 7);
   const { token, _id } = React.useContext(UserContext);
 
   useEffect(() => {
