@@ -1,8 +1,6 @@
-<script src="http://192.168.1.26:8097"></script>
 import React, { useState, useEffect } from "react";
 import { View, StyleSheet, Text, Modal } from "react-native";
 import { Heading } from "../components/Heading";
-// import {Input} from '../components/Input';
 import { ImageComponent } from "../components/ImageComponent";
 import { FilledButton } from "../components/FilledButton";
 import { IconButton } from "../components/IconButton";
@@ -12,15 +10,17 @@ import { Loading } from "../components/Loading";
 import Colors from "../constants/Colors";
 import { useNavigation } from "@react-navigation/native";
 import { TextButton } from "../components/TextButton";
-import { store } from "../store/reducers/storeReducer";
+import { UserContext } from '../context/UserContext'
+import { useContext } from 'react-redux'
 
 export default function HomeScreen() {
   const [loading, setLoading] = React.useState(false);
   const [error, setError] = React.useState("");
   const { logout } = React.useContext(AuthContext);
   const [state, updateState] = useState("Start New Reflection");
+  const { name } = React.useContext(UserContext)
+  
 
-  //navigation
   const navigation = useNavigation();
 
   function navigateToExerciseList() {
@@ -33,7 +33,7 @@ export default function HomeScreen() {
 
   useEffect(() => {
     updateState("continue reflection...");
-  }, [store.getState()]);
+  }, []);
 
   const startNew = () => {
     console.log("set back store to initial state - dispatch to be implemented");
@@ -59,7 +59,7 @@ export default function HomeScreen() {
         }}
       />
       <Heading style={styles.title}>
-        Welcome, time to reflect Ana!
+       {`Welcome, time to reflect ${name}`}
       </Heading>
       <ImageComponent source={require("../assets/S1B9LKEw.jpeg")} />
       <Text style={styles.container}>

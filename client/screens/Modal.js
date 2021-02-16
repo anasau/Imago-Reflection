@@ -71,6 +71,7 @@ const styles = StyleSheet.create({
     shadowRadius: 3.84,
     elevation: 5,
     minHeight: 600,
+    height:'95%',
     width: "90%",
   },
   openButton: {

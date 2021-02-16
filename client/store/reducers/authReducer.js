@@ -55,9 +55,8 @@ export function authReducer() {
           email: data.email,
           _id:data.userId,  
           token: data.token,
+          name:data.name, 
         };
-        console.log('user- auth reducer', user)
-
         await SecureStore.setItemAsync("user", JSON.stringify(user));
         dispatch(createAction("SignIn", user));
       },
@@ -66,10 +65,11 @@ export function authReducer() {
         dispatch(createAction("SignOut"));
       },
 
-      register: async (email, password) => {
+      register: async (email, password, Name) => {
         await axios.post(`${BASE_URL}/auth/users/signup`, {
           email,
           password,
+          name:Name
         });
       },
 

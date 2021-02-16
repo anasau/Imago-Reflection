@@ -34,15 +34,15 @@ export default function Exercise({ route }) {
       user: { email, _id }
     };
     updateMessage("");
-    console.log('data to be saved', data)
 
     const result = async () => {
       try {
         await postInput("/reflection", data, token).then(data =>
-          updateId(data._id), 
-          updateMessage('Reflection has been successfully created'))
+          updateId(data._id),
+          updateMessage('Reflection has been successfully created')), 
+        navigateToProfile()
       } catch (e) {
-        console.log(e)
+        updateMessage(e)
       }
     }
     result();
@@ -59,10 +59,18 @@ export default function Exercise({ route }) {
       exercise7: dataStore[6].input,
     };
     updateMessage("");
-    const edit = updateInput("/reflection", data, token).then((data) =>
-      updateMessage("Reflection has been successfully updated.")
-    );
-    return edit;
+
+    const edit = async () => {
+      try {
+        await updateInput("/reflection", data, token).then((data) =>
+          updateMessage("Reflection has been successfully updated."), 
+          navigateToProfile()
+        );
+      } catch (e) {
+        updateMessage(e)
+      }
+    }
+    edit()
   };
 
   const [remainingTime, updateRemainingTime] = useState(90);
@@ -110,6 +118,10 @@ export default function Exercise({ route }) {
     navigation.navigate("ReflectionExerciseList", { name: name.slice(-1) });
   }
 
+
+  function navigateToProfile() {
+    navigation.navigate("Profile");
+  }
   const instruction =
     "Before starting this exercise, set a timer. Check tips throughout the exercise or get in touch with the couch for guidance. Enjoy! ";
 

@@ -24,6 +24,7 @@ export function AuthScreen({ navigation }) {
         <Heading style={styles.title}> Welcome to Imago </Heading>
       </View>
       <Error error={error} />
+     
       <Input
         style={styles.input}
         placeholder={"Email"}

@@ -16,6 +16,8 @@ export function RegistrationScreen({ navigation }) {
   const [password, setPassword] = React.useState();
   const [loading, setLoading] = React.useState(false);
   const [error, setError] = React.useState("");
+  const [Name, setName] = React.useState('Ana')
+
   return (
     <AuthContainer>
       <IconButton
@@ -34,11 +36,18 @@ export function RegistrationScreen({ navigation }) {
       <Error error={error} />
       <Input
         style={styles.input}
+        placeholder={"Name"}
+        value={Name}
+        onChangeText={setName}
+      />
+      <Input
+        style={styles.input}
         placeholder={"Email"}
         keyboardType={"email-address"}
         value={email}
         onChangeText={setEmail}
       />
+      
       <Input
         style={styles.input}
         placeholder={"Password"}
@@ -52,7 +61,7 @@ export function RegistrationScreen({ navigation }) {
         onPress={async () => {
           try {
             setLoading(true);
-            await register(email, password);
+            await register(email, password, Name);
             navigation.pop();
           } catch (e) {
             setError(e.message);

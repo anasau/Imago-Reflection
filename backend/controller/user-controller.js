@@ -35,12 +35,12 @@ const getUsers = async (req, res, next) => {
 
 const signup = async (req, res, next) => {
 
-  const { email, password } = req.body;
+  const { email, password, name } = req.body;
 
   let existingUser;
 
   try {
-    existingUser = await User.findOne({ email: email });
+    existingUser = await User.findOne({ email });
   } catch (err) {
     const error = new HttpError(
       'Signing up failed, please try again later.',
@@ -71,7 +71,8 @@ const signup = async (req, res, next) => {
   const createdUser = new User({
     email,
     password: hashedPassword,
-    reflections: []
+    reflections: [],
+    name
   });
 
   try {
@@ -101,8 +102,7 @@ const signup = async (req, res, next) => {
     return next(error);
   }
   res
-    .status(201)
-    .json({ userId: createdUser.id, email: createdUser.email, token: token });
+    .status(201).json({ userId: createdUser.id, email: createdUser.email, token: token, name:createdUser.name});
 };
 
 const login = async (req, res, next) => {
@@ -110,7 +110,7 @@ const login = async (req, res, next) => {
   let existingUser;
 
   try {
-    existingUser = await User.findOne({ email: email });
+    existingUser = await User.findOne({ email });
   } catch (err) {
     const error = new HttpError(
       'Logging in failed, please try again later.',
@@ -153,7 +153,7 @@ const login = async (req, res, next) => {
 
   try {
     token = jwt.sign(
-      { userId: existingUser.id, email: existingUser.email },
+      { userId: existingUser.id, email: existingUser.email, name:existingUser.name },
       secret,
       { expiresIn: '3h' }
     );
@@ -168,7 +168,9 @@ const login = async (req, res, next) => {
   res.json({
     userId: existingUser.id,
     email: existingUser.email,
-    token: token
+    token: token,
+    name:existingUser.name
+
   });
 
 };
@@ -176,4 +178,4 @@ const login = async (req, res, next) => {
 exports.getUsers = getUsers;
 exports.signup = signup;
 exports.login = login;
-// exports.getReflections = getReflections; 
+// exports.getReflections = getReflections;

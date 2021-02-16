@@ -4,11 +4,9 @@ const User = require('../models/user-model')
 exports.getAll = async (req, res) => {
   try {
     const reflection = await Reflection.find({});
-    res.status = 201;
-    res.send(reflection);
+    res.status(200).json({ success: true, data: reflection })
   } catch (e) {
-    res.sendStatus(500);
-    res.send(e);
+    res.status(500).json({ data: e });
   }
 
 };
@@ -32,8 +30,8 @@ exports.postOne = async (req, res) => {
     res.status(200).json({ success: true, data: reflection })
 
   } catch (e) {
-    res.sendStatus = 500;
-    res.send(e);
+    res.status(500).json({ data: e });
+
   }
 };
 
@@ -44,11 +42,11 @@ exports.update = async (req, res) => {
   try {
     const response = await Reflection.findByIdAndUpdate({ _id },
       { exercise1, exercise2, exercise3, exercise4, exercise5, exercise6, exercise7 }, { new: true });
-    res.status(200);
-    res.send(response);
+
+    res.status(500).json({ status: true, data: response });
   } catch (e) {
-    res.status(500);
-    res.send(e);
+    res.status(500).json({ data: e });
+
   }
 };
 

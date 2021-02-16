@@ -42,7 +42,7 @@ export default function InputScren({ route }) {
   return (
     <HomeScreenContainer>
       <Text style={text}>
-        {" "}{name}{" "}
+        {name}
       </Text>
       <Text> {remainingTime} </Text>
       <CompletedExercise title="Save input" onPress={() => addInput()} />
