@@ -59,7 +59,6 @@ export function updateInput(endpoint, data, token) {
           exercise5: data.exercise5,
           exercise6: data.exercise6,
           exercise7: data.exercise7,
-          user: data.user
         },
         {
           headers: {
