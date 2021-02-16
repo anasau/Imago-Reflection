@@ -37,12 +37,15 @@ export default function Exercise({ route }) {
     console.log('data to be saved', data)
 
     const result = async () => {
-      await postInput("/reflection", data, token).then(data => console.log(data, 'async console'))
-        // updateMessage('reflection has been successfully added'))
-
+      try {
+        await postInput("/reflection", data, token).then(data =>
+          updateId(data._id), 
+          updateMessage('Reflection has been successfully created'))
+      } catch (e) {
+        console.log(e)
+      }
     }
     result();
-
   }
   const updateReflection = () => {
     const data = {
@@ -54,11 +57,10 @@ export default function Exercise({ route }) {
       exercise5: dataStore[4].input,
       exercise6: dataStore[5].input,
       exercise7: dataStore[6].input,
-      user: { email, _id }
     };
     updateMessage("");
     const edit = updateInput("/reflection", data, token).then((data) =>
-      updateMessage("Reflection has been successfully submitted.")
+      updateMessage("Reflection has been successfully updated.")
     );
     return edit;
   };
@@ -89,12 +91,12 @@ export default function Exercise({ route }) {
 
   function openCamera() {
     updateMessage("");
-    navigation.navigate("Camera", { name: name });
+    navigation.navigate("Camera", { name });
   }
 
   function addInput() {
     updateMessage("");
-    navigation.navigate("Input", { name: name, remainingTime: remainingTime });
+    navigation.navigate("Input", { name, remainingTime });
   }
 
   function nextExerciseFunc() {
