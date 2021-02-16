@@ -36,7 +36,7 @@ export default function InputScren({ route }) {
   }
 
   const closePage = () => {
-    navigation.navigate("Exercise", { name: name });
+    navigation.navigate("Exercise", { name });
   };
 
   return (

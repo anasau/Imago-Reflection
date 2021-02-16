@@ -1,11 +1,11 @@
 import React from "react";
 import axios from "axios";
-import {BASE_URL} from '@env'
+import { BASE_URL } from '@env'
 
 
-export function getData(endpoint, token) {
+export function getData(endpoint, token, user) {
   const response = axios
-    .get(`${BASE_URL}${endpoint}`, {
+    .get(`${BASE_URL}${endpoint}/:${user}`, {
       headers: {
         Authorization: `bearer ${token}`,
       },
@@ -29,6 +29,7 @@ export function postInput(endpoint, data, token) {
         exercise5: data.exercise5,
         exercise6: data.exercise6,
         exercise7: data.exercise7,
+        user: data.user
       },
       {
         headers: {
@@ -58,6 +59,7 @@ export function updateInput(endpoint, data, token) {
           exercise5: data.exercise5,
           exercise6: data.exercise6,
           exercise7: data.exercise7,
+          user: data.user
         },
         {
           headers: {

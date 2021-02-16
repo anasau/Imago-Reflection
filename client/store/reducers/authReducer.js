@@ -53,8 +53,10 @@ export function authReducer() {
       
         const user = {
           email: data.email,
+          _id:data.userId,  
           token: data.token,
         };
+        console.log('user- auth reducer', user)
 
         await SecureStore.setItemAsync("user", JSON.stringify(user));
         dispatch(createAction("SignIn", user));

@@ -5,6 +5,19 @@ const HttpError = require('../models/http-error');
 const User = require('../models/user-model');
 
 
+// const getReflections = async (req, res) => {
+//   let reflections;
+//   try {
+//     reflections = await User.find().populate('reflections')
+//   } catch (e) {
+//     const error = new HttpError(
+//       'Fetching users failed, please try again later.',
+//       500
+//     );
+//     res.send(error)
+//   }
+//   res.json({ reflections: reflections.map(reflection => reflection.toObject({ getters: true })) });
+// }
 
 const getUsers = async (req, res, next) => {
   let users;
@@ -58,6 +71,7 @@ const signup = async (req, res, next) => {
   const createdUser = new User({
     email,
     password: hashedPassword,
+    reflections: []
   });
 
   try {
@@ -77,7 +91,7 @@ const signup = async (req, res, next) => {
     token = jwt.sign(
       { userId: createdUser.id, email: createdUser.email },
       secret,
-      { expiresIn: '1h' } 
+      { expiresIn: '1h' }
     );
   } catch (err) {
     const error = new HttpError(
@@ -94,7 +108,7 @@ const signup = async (req, res, next) => {
 const login = async (req, res, next) => {
   const { email, password } = req.body;
   let existingUser;
-  
+
   try {
     existingUser = await User.findOne({ email: email });
   } catch (err) {
@@ -110,7 +124,7 @@ const login = async (req, res, next) => {
       'Invalid credentials, could not log you in.',
       403
     );
-  res.send(error);
+    res.send(error);
   }
 
   let isValidPassword = false;
@@ -135,10 +149,12 @@ const login = async (req, res, next) => {
   }
 
   let token;
+  const secret = process.env.SECRET
+
   try {
     token = jwt.sign(
       { userId: existingUser.id, email: existingUser.email },
-      SECRET,
+      secret,
       { expiresIn: '3h' }
     );
   } catch (err) {
@@ -160,3 +176,4 @@ const login = async (req, res, next) => {
 exports.getUsers = getUsers;
 exports.signup = signup;
 exports.login = login;
+// exports.getReflections = getReflections; 

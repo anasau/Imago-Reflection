@@ -11,17 +11,18 @@ import { store } from "../store/reducers/storeReducer";
 import { postInput, updateInput } from "../Server/server";
 import { TextButton } from "../components/TextButton";
 import { UserContext } from '../context/UserContext'
+import { useSelector } from 'react-redux';
 
 export default function Exercise({ route }) {
-  const { token } = React.useContext(UserContext);
+  const { token, email, _id } = React.useContext(UserContext);
   const [name, updateName] = useState(route.params.name);
   const [id, updateId] = useState(
     store.getState().filter((object) => object.name === "_id")[0].input
   );
   const [message, updateMessage] = useState("");
+  const dataStore = useSelector(state => state)
 
   const completeReflection = () => {
-    const dataStore = store.getState();
     const data = {
       exercise1: dataStore[0].input,
       exercise2: dataStore[1].input,
@@ -30,17 +31,20 @@ export default function Exercise({ route }) {
       exercise5: dataStore[4].input,
       exercise6: dataStore[5].input,
       exercise7: dataStore[6].input,
+      user: { email, _id }
     };
     updateMessage("");
-    const result = postInput("/reflection", data, token).then((data) =>
-      updateMessage(data), 
-      console.log('ADBdskcbSD,V')
-    );
-    return result;
-  };
+    console.log('data to be saved', data)
 
+    const result = async () => {
+      await postInput("/reflection", data, token).then(data => console.log(data, 'async console'))
+        // updateMessage('reflection has been successfully added'))
+
+    }
+    result();
+
+  }
   const updateReflection = () => {
-    const dataStore = store.getState();
     const data = {
       _id: dataStore[7].input,
       exercise1: dataStore[0].input,
@@ -50,6 +54,7 @@ export default function Exercise({ route }) {
       exercise5: dataStore[4].input,
       exercise6: dataStore[5].input,
       exercise7: dataStore[6].input,
+      user: { email, _id }
     };
     updateMessage("");
     const edit = updateInput("/reflection", data, token).then((data) =>

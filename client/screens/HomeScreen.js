@@ -1,3 +1,4 @@
+<script src="http://192.168.1.26:8097"></script>
 import React, { useState, useEffect } from "react";
 import { View, StyleSheet, Text, Modal } from "react-native";
 import { Heading } from "../components/Heading";

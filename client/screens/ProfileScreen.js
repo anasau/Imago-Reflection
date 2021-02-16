@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
 import { HomeScreenContainer } from "../components/HomeScreenContainer";
-import { store } from "../store/reducers/storeReducer";
 import { getData, postInput } from "../Server/server";
 import { Feather } from "@expo/vector-icons";
 import { TextButton } from "../components/TextButton";
@@ -25,15 +24,23 @@ export default function ProfileScreen() {
   const dispatch = useDispatch();
 
   const [FlatListisVisible, updateFLisVisible] = useState(false);
-  const { token } = React.useContext(UserContext);
   const { logout } = React.useContext(AuthContext);
   const dataStore = useSelector(state => state).slice(0, 7);
+  const { token, _id } = React.useContext(UserContext);
 
   useEffect(() => {
-    getData("/reflection", token).then((data) => {
-      dispatch({ type: "GET_DATABASE_DATA", payload: data[data.length - 1] });
-    });
+    const data = async () => {
+      const user = { _id }
 
+      try {
+        await getData("/reflection", token, user).then((data) => {    
+          data.length > 0 && dispatch({ type: "GET_DATABASE_DATA", payload: data[data.length - 1] });
+        });
+      } catch (e) {
+        console.log(e)
+      }
+    }
+    data()
   }, []);
 
   return (
@@ -65,65 +72,65 @@ export default function ProfileScreen() {
             updateFLisVisible(true)
         }
       />
-        <FlatList
-          style={{ width: "100%" }}
-          contentContainerStyle={styles.container}
-          data={dataStore}
-          renderItem={({ item, index }) => (
-            <ScrollView >
-              {item.input.slice(0, 4) === "file" ? (
-                <View style={{ borderRadius: 6 }}>
-                  <Image
-                    source={{ uri: item.input }}
-                    style={styles.exerciseList}
-                  />
+      <FlatList
+        style={{ width: "100%" }}
+        contentContainerStyle={styles.container}
+        data={dataStore}
+        renderItem={({ item, index }) => (
+          <ScrollView >
+            {item.input.slice(0, 4) === "file" ? (
+              <View style={{ borderRadius: 6 }}>
+                <Image
+                  source={{ uri: item.input }}
+                  style={styles.exerciseList}
+                />
 
-                  <Feather
-                    name="zoom-in"
-                    size={24}
-                    color={Colors.lightGreen}
-                    style={styles.zoomInIcon}
+                <Feather
+                  name="zoom-in"
+                  size={24}
+                  color={Colors.lightGreen}
+                  style={styles.zoomInIcon}
+                  onPress={() => {
+                    navigation.navigate("Picture", { input: item.input });
+                  }}
+                />
+              </View>
+            ) : (
+                <View
+                  style={styles.exerciseList}
+                >
+                  <Text
+                    style={styles.exerciseDisplay}
+                    color={
+                      item.input.slice(0, 11).trim() === "Reflection"
+                        ? "purple"
+                        : Colors.primary}
+                    onPress={() =>
+                      navigation.navigate("View", { input: item.input })
+                    }
+                  >
+                    {index + 1 + ": " + item.input.slice(0, 35) + "..."}
+                  </Text>
+
+                  <AntDesign
+                    name="edit"
+                    size={15}
+                    color={Colors.brightorange}
+                    style={styles.editIcon}
                     onPress={() => {
-                      navigation.navigate("Picture", { input: item.input });
+                      navigation.navigate("Exercise", {
+                        name: "Exercise " + +item.name.slice(-1),
+                      }),
+                        updateFLisVisible(false);
                     }}
                   />
                 </View>
-              ) : (
-                  <View
-                    style={styles.exerciseList}
-                  >
-                    <Text
-                      style={styles.exerciseDisplay}
-                      color={
-                        item.input.slice(0, 11).trim() === "Reflection"
-                          ? "purple"
-                          : Colors.primary}
-                      onPress={() =>
-                        navigation.navigate("View", { input: item.input })
-                      }
-                    >
-                      {index + 1 + ": " + item.input.slice(0, 35) + "..."}
-                    </Text>
+              )}
+          </ScrollView>
+        )}
+        keyExtractor={(item, index) => index.toString()}
+      />
 
-                    <AntDesign
-                      name="edit"
-                      size={15}
-                      color={Colors.brightorange}
-                      style={styles.editIcon}
-                      onPress={() => {
-                        navigation.navigate("Exercise", {
-                          name: "Exercise " + +item.name.slice(-1),
-                        }),
-                          updateFLisVisible(false);
-                      }}
-                    />
-                  </View>
-                )}
-            </ScrollView>
-          )}
-          keyExtractor={(item, index) => index.toString()}
-        />
-  
     </HomeScreenContainer>
   );
 }
