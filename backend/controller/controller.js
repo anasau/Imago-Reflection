@@ -2,7 +2,6 @@ const Reflection = require('../models/model');
 const User = require('../models/user-model')
 
 exports.getAll = async (req, res) => {
-  const { user } = req.params
   try {
     const reflection = await Reflection.find({});
     res.status = 201;
@@ -31,16 +30,6 @@ exports.postOne = async (req, res) => {
     await reflection.save();
 
     res.status(200).json({ success: true, data: reflection })
-    // const user = await User.findById({_id: user._id})
-    // console.log(
-    //   user, 'user before push'
-    // )
-    // user.reflections.push(reflection);
-    // console.log(
-    //   user, 'user AFTER push'
-    // )
-    // await user.save();
-    // console.log(user, 'user  ??/')
 
   } catch (e) {
     res.sendStatus = 500;
