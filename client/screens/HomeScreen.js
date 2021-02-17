@@ -19,7 +19,7 @@ export default function HomeScreen() {
   const { logout } = React.useContext(AuthContext);
   const [state, updateState] = useState("Start New Reflection");
   const { name } = React.useContext(UserContext)
-  
+
 
   const navigation = useNavigation();
 
@@ -59,7 +59,7 @@ export default function HomeScreen() {
         }}
       />
       <Heading style={styles.title}>
-       {`Welcome, time to reflect ${name}`}
+        {`Welcome, time to reflect ${name}`}
       </Heading>
       <ImageComponent source={require("../assets/S1B9LKEw.jpeg")} />
       <Text style={styles.container}>

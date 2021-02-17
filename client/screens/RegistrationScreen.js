@@ -9,6 +9,8 @@ import Colors from "../constants/Colors";
 import { AuthContainer } from "../components/AuthContainer";
 import { AuthContext } from "../context/AuthContext";
 import { Loading } from '../components/Loading'
+import { Entypo } from '@expo/vector-icons';
+
 
 export function RegistrationScreen({ navigation }) {
   const { register } = React.useContext(AuthContext);
@@ -16,7 +18,8 @@ export function RegistrationScreen({ navigation }) {
   const [password, setPassword] = React.useState();
   const [loading, setLoading] = React.useState(false);
   const [error, setError] = React.useState("");
-  const [Name, setName] = React.useState('Ana')
+  const [Name, setName] = React.useState('')
+
 
   return (
     <AuthContainer>
@@ -31,6 +34,7 @@ export function RegistrationScreen({ navigation }) {
       <View style={styles.welcome}>
         <Heading style={styles.title}>
           Welcome to Imago
+          <Entypo name="creative-cloud" size={24} color={Colors.accent} />
         </Heading>
       </View>
       <Error error={error} />
@@ -47,7 +51,7 @@ export function RegistrationScreen({ navigation }) {
         value={email}
         onChangeText={setEmail}
       />
-      
+
       <Input
         style={styles.input}
         placeholder={"Password"}

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { HomeScreenContainer } from "../components/HomeScreenContainer";
-import { styles } from './StyleSheets/PictureScreenStyleSheet'
+import { styles } from './StyleSheets/PictureScreen.style'
 import {
   Image,
   Text,

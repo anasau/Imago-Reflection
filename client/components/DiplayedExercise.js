@@ -26,10 +26,6 @@ export function DisplayedExercise(props) {
 
   return (
     <HomeScreenContainer style={styles.screen}>
-      <Heading> Imago Reflection </Heading>
-      <Instruction>
-        {instruction}
-      </Instruction>
       <View style={styles.carousel}>
         <AntDesign
           name="leftcircleo"

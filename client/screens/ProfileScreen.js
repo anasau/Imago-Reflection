@@ -10,7 +10,9 @@ import { IconButton } from "../components/IconButton";
 import { AntDesign } from "@expo/vector-icons";
 import { AuthContext } from "../context/AuthContext";
 import { UserContext } from '../context/UserContext'
-import { styles } from './StyleSheets/ProfileScreenStyleSheet'
+import { styles } from './StyleSheets/ProfileScreen.style'
+import { Exercises } from '../store/exercises'
+
 import {
   Text,
   ScrollView,
@@ -32,7 +34,7 @@ export default function ProfileScreen() {
       const user = { _id }
 
       try {
-        await getData("/reflection", token, user).then((data) => {    
+        await getData("/reflection", token, user).then((data) => {
           data.length > 0 && dispatch({ type: "GET_DATABASE_DATA", payload: data[data.length - 1] });
         });
       } catch (e) {
@@ -43,7 +45,7 @@ export default function ProfileScreen() {
   }, []);
 
   return (
-    <HomeScreenContainer>
+    <View style={{ backgroundColor: 'white' }}>
       <IconButton
         style={styles.closeIcon}
         name={"sign-out"}
@@ -56,21 +58,7 @@ export default function ProfileScreen() {
           }
         }}
       />
-      {/* <Image
-        source={require("../assets/future2.png")}
-        style={styles.cover}
-      /> */}
-      <TextButton
-        title="Your latest reflection"
-        style={styles.textButton}
-        textStyle={{ alignItems: "flex-start" }}
-        onPress={() =>
-          FlatListisVisible ?
-            updateFLisVisible(false)
-            :
-            updateFLisVisible(true)
-        }
-      />
+      <Text style={styles.heading} />
       <FlatList
         style={{ width: "100%" }}
         contentContainerStyle={styles.container}
@@ -98,31 +86,32 @@ export default function ProfileScreen() {
                 <View
                   style={styles.exerciseList}
                 >
-                  <Text
-                    style={styles.exerciseDisplay}
-                    color={
-                      item.input.slice(0, 11).trim() === "Reflection"
-                        ? "purple"
-                        : Colors.primary}
-                    onPress={() =>
-                      navigation.navigate("View", { input: item.input })
-                    }
-                  >
-                    {index + 1 + ": " + item.input.slice(0, 35) + "..."}
+                  <Text style={styles.cardTitle}>
+                    {item.name}
                   </Text>
+                  <View style={styles.cardBody}>
+                    <Text
+                      style={styles.exerciseDisplay}
+                      onPress={() =>
+                        navigation.navigate("View", { input: item.input })
+                      }
+                    >
+                      {item.input.slice(0, 120)}
+                    </Text>
+                    <AntDesign
+                      name="edit"
+                      size={15}
+                      color='white'
+                      style={styles.editIcon}
+                      onPress={() => {
+                        navigation.navigate("Exercise", {
+                          name: "Exercise " + +item.name.slice(-1),
+                        }),
+                          updateFLisVisible(false);
+                      }}
+                    />
+                  </View>
 
-                  <AntDesign
-                    name="edit"
-                    size={15}
-                    color={Colors.brightorange}
-                    style={styles.editIcon}
-                    onPress={() => {
-                      navigation.navigate("Exercise", {
-                        name: "Exercise " + +item.name.slice(-1),
-                      }),
-                        updateFLisVisible(false);
-                    }}
-                  />
                 </View>
               )}
           </ScrollView>
@@ -130,6 +119,6 @@ export default function ProfileScreen() {
         keyExtractor={(item, index) => index.toString()}
       />
 
-    </HomeScreenContainer>
+    </View>
   );
 }

@@ -1,9 +1,12 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
+import Colors from "../constants/Colors";
 
 export function Instruction({ children }) {
   return (
-    <View style={{ width: "90%" }}>
+    <View style={{
+      width: "90%"
+    }}>
       <Text style={styles.text}>{children}</Text>
     </View>
   );

@@ -10,6 +10,7 @@ import { AuthContext } from "../context/AuthContext";
 import { Loading } from "../components/Loading";
 import Colors from "../constants/Colors";
 import {username, pass} from'@env'
+import { Entypo } from '@expo/vector-icons';
 
 export function AuthScreen({ navigation }) {
   const { login } = React.useContext(AuthContext);
@@ -21,7 +22,9 @@ export function AuthScreen({ navigation }) {
   return (
     <AuthContainer>
       <View style={styles.welcome}>
-        <Heading style={styles.title}> Welcome to Imago </Heading>
+        <Heading style={styles.title}> Welcome to Imago
+        <Entypo name="creative-cloud" size={24} color={Colors.accent} />
+         </Heading>
       </View>
       <Error error={error} />
      

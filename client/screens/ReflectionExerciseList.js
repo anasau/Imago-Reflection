@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from "react";
 import exercises from "../store/exercises";
 import { DisplayedExercise } from "../components/DiplayedExercise";
-import { useNavigation } from "@react-navigation/native";
 
 export default function ReflectionExerciseList({ route }) {
-  const navigation = useNavigation();
   const { name } = route.params;
   const data = exercises;
   const [currentExercise, updateCurrentExercise] = useState(0);
