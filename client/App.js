@@ -33,20 +33,6 @@ export default function () {
       <RootStack.Screen name={'MainStack'} >
         {() => (
           <UserContext.Provider value={state.user}>
-            <IconButton
-              style={styles.closeIcon}
-              name={'sign-out'}
-              color={Colors.primary}
-              onPress={async () => {
-                try {
-                  setLoading(true);
-                  await logout()
-                } catch (e) {
-                  setError(e.message);
-                  setLoading(false);
-                }
-              }}
-            />
             <Provider store={store} >
               <TabNavigator />
             </Provider>
