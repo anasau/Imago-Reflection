@@ -6,7 +6,7 @@ As a user you can create an account, log in and choose to start a new reflection
 <code><img height="400" alt="Home Screen" src="https://github.com/anasau/Imago-Reflection/blob/default/assets/loginscreen.jpg"></code>
 <code><img height="400" alt="Home Screen" src="https://github.com/anasau/Imago-Reflection/blob/default/assets/homescreen.jpg"></code>
 
-You can then browse through the exercises, pick one and start reflecting following the instructions. You can chose to type the answer or upload a picture of your hand-written notes. 
+You can then browse through the exercises, pick one and start reflecting following the instructions. You can chose to type the answer or upload a picture of your hand-written notes.  <br/> 
 <code><img height="400" alt="Exercise 2 " src="https://github.com/anasau/Imago-Reflection/blob/default/assets/exercisesscreen.jpg"></code>
 <code><img height="400" alt="Reflection Page" src="https://github.com/anasau/Imago-Reflection/blob/default/assets/exercisescreen.jpg"></code>
 
