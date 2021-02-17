@@ -3,7 +3,7 @@ import Colors from "../../constants/Colors";
 export const styles = {
   container: {
     paddingBottom: 0,
-    marginHorizontal: 8,
+    marginHorizontal: 3,
   },
   closeIcon: {
     position: "absolute",
@@ -13,11 +13,29 @@ export const styles = {
 
   exerciseList: {
     borderRadius: 6,
-    backgroundColor: "#ddd",
-    margin: 5,
-    padding: 3,
+    borderWidth: 1,
+    borderColor: Colors.primary,
+    borderRadius: 6,
+    margin: 10,
+    padding: 10,
     flexDirection: "row",
-    height:60
+    height: 150,
+    display: 'flex',
+    flexDirection: 'column',
+    backgroundColor:'#eee'
+
+  },
+  cardBody: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'space-between',
+  },
+  cardTitle: {
+    borderWidth: 1,
+    borderColor: Colors.primary, 
+    borderRadius: 6,
+    padding: 5,
+    color:Colors.primary
   },
   textButton: {
     color: Colors.primary,
@@ -27,10 +45,12 @@ export const styles = {
   editIcon: {
     width: "10%",
     marginVertical: 10,
-    marginHorizontal: 10,
+
   },
   exerciseDisplay: {
     marginVertical: 10,
+    color:Colors.primary
+
   },
   image: {
     height: 100,
@@ -38,8 +58,16 @@ export const styles = {
   },
   cover: {
     height: 100,
+    width: '100%',
     margin: 0,
     paddingTop: 0
+  },
+  heading: {
+    height: 100,
+    width: '100%',
+    margin: 0,
+    paddingTop: 0, 
+    backgroundColor:'white'
   },
   zoomInIcon: {
     position: "absolute",
