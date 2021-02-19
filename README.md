@@ -1,12 +1,14 @@
 # HP Reflection
 HP Reflection helps you do a deep introspection of the past year by providing a set of 7 questions prepared by a professional coach and a platform to log your thoughts. 
 
-As a user you can create an account, log in and choose to start a new reflection or continue an existing one. 
+As a user you can create an account, log in and choose to start a new reflection or continue an existing one. <br/>
 
 <code><img height="400" alt="Home Screen" src="https://github.com/anasau/Imago-Reflection/blob/default/assets/loginscreen.jpg"></code>
 <code><img height="400" alt="Home Screen" src="https://github.com/anasau/Imago-Reflection/blob/default/assets/homescreen.jpg"></code>
 
-You can then browse through the exercises, pick one and start reflecting following the instructions. You can chose to type the answer or upload a picture of your hand-written notes.  <br/> 
+You can then browse through the exercises, pick one and start reflecting following the instructions. You can chose to type the answer or upload a picture of your hand-written notes. 
+<br/>
+<br/>
 <code><img height="400" alt="Exercise 2 " src="https://github.com/anasau/Imago-Reflection/blob/default/assets/exercisesscreen.jpg"></code>
 <code><img height="400" alt="Reflection Page" src="https://github.com/anasau/Imago-Reflection/blob/default/assets/exercisescreen.jpg"></code>
 
@@ -14,17 +16,17 @@ You can then browse through the exercises, pick one and start reflecting followi
 # Getting Started 
 
 1. Clone the repo 
-git clone https://github.com/anasau/Imago-Reflection.git
-cd imago-reflect
+  - git clone https://github.com/anasau/Imago-Reflection.git
+  - cd imago-reflection
 
 
-2. Install dependencies both on client and backend 
-npm install 
+2. Install dependencies both on client and backend <br/>
+  - npm install 
 
 3. update .envexample files 
 
 4. Start development server
-npm start
+  - npm start
 
 4. Scan the barcode with the Expo app on your phone or follow the terminal instructions to load up the emulator on your machine.
 
